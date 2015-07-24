@@ -13,6 +13,15 @@
 		Your pet's name is <span id="pet-name" contenteditable="true">Fluffy</span>.
 		<a data-setvariable='{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }'></a>
 
+		<span data-iftrue="pet.name == ''">
+		<span class="ifTrue">
+			blah blah blah
+		</span>
+		<span class="ifFalse">
+		<span data-showvariable="pet.body.species.name"></span>
+		</span>
+		</span>
+
 		<script type="text/javascript">
 
 		</script>
