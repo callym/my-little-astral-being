@@ -1,0 +1,25 @@
+{
+  "name": "my-little-astral-being",
+  "version": "0.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/callym/my-little-astral-being.git"
+  },
+  "author": "callym",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/callym/my-little-astral-being/issues"
+  },
+  "homepage": "https://github.com/callym/my-little-astral-being#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-watch": "^4.3.3"
+  }
+}
