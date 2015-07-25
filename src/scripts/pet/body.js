@@ -4,7 +4,7 @@ function Body()
 {
 	this.species = this.NewSpecies();
 
-	this.energy = new SettableInt(0, 10);
+	this.energy = new SettableInt(10);
 };
 
 Body.prototype.SubSpecies =

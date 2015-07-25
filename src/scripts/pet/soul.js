@@ -1,6 +1,8 @@
+//=require element.js
+
 function Soul()
 {
-	this.element = "";
+	this.elements = CreateRandomiseElements();
 
-	this.mana = new SettableInt(0, 10);
+	this.mana = new SettableInt(10);
 };
