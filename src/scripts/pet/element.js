@@ -12,6 +12,18 @@ Elements.prototype.toArray = function()
 	return [this.Air, this.Earth, this.Fire, this.Water, this.Spirit];
 };
 
+Elements.prototype.toTableArray = function()
+{
+	var t = [["Element", "Current", "Maximum"]];
+	var arr = this.toArray()
+	for (var i = 0; i < arr.length; i++)
+	{
+		t.push([arr[i].name, arr[i].level.current, arr[i].level.maximum]);
+	}
+
+	return t;
+};
+
 Elements.prototype.changeMaximumFromArray = function(arr)
 {
 	var elements = this.toArray();

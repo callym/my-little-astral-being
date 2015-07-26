@@ -1,22 +1,39 @@
-updateLists =
+if (typeof updateLists == "undefined")
 {
-	show: [],
-	iftrue: []
-};
+	updateLists = {};
+}
+updateLists.show = [];
+updateLists.showVariables = [];
+updateLists.iftrue = [];
+updateLists.iftrueVariables = [];
 
 function updateElements()
 {
 	for (var i = 0; i < updateLists.show.length; i++)
 	{
 		var curUpdate = updateLists.show[i];
-    	eval("curUpdate.innerHTML = " + curUpdate.dataset.showvariable);
+		var value = eval(curUpdate.dataset.showvariable);
+		if (updateLists.showVariables[i] == value)
+		{
+			continue;
+		}
+
+    	curUpdate.innerHTML = value;
+    	updateLists.showVariables[i] = value;
 	}
 	for (var i = 0; i < updateLists.iftrue.length; i++)
 	{
 		var curUpdate = updateLists.iftrue[i];
+		var value = eval(curUpdate.dataset.ifTrue);
+		if (updateLists.iftrueVariables[i] == value)
+		{
+			continue;
+		}
+
+		updateLists.iftrueVariables[i] = value;
 		var ifTrue = $(curUpdate).children(".ifTrue");
 		var ifFalse = $(curUpdate).children(".ifFalse")
-		if (eval(curUpdate.dataset.iftrue))
+		if (value)
 		{
 			if (ifTrue.length && ifFalse.length)
 			{

@@ -29,3 +29,33 @@ function Shuffle(array) {
 
     return array;
 }
+
+function EqualArrays(arr1, arr2)
+{
+    if (typeof arr1 == "undefined" || typeof arr2 == "undefined")
+    {
+        return false;
+    }
+
+    if (arr1.length != arr2.length)
+    {
+        return false;
+    }
+
+    for (var i = 0; i < arr1.length; i++)
+    {
+        if (arr1[i].constructor == Array && arr2[i].constructor == Array)
+        {
+            var subarray = EqualArrays(arr1[i], arr2[i]);
+            if (subarray == false)
+            {
+                return false;
+            }
+        }
+        else if (arr1[i] != arr2[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
