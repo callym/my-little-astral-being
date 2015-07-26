@@ -10,14 +10,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script src="scripts/main.js"></script>
 	</head>
-	<body>
-		<div id="pet-name-dialog">
+	<body class="hide">
+		<div id="pet-name-dialog" title="You found an egg!">
 			Your pet's name is <span id="pet-name" contenteditable="true">Fluffy</span>.
-			<a id="pet-name-ok" data-setvariable='{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }'></a>
 		</div>
 
 		<div>
-		<span data-showvariable="pet.name"></span> is a <span data-showvariable="pet.body.species.name"></span>
+		<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
+
 		</div>
 
 		<table class="bottomright" data-arraytotable="pet.soul.elements.toTableArray()"></table>
@@ -25,16 +25,20 @@
 		<script type="text/javascript">
 		$(function()
 		{
-			/*$("#pet-name-dialog").dialog(
-				{
-					hide: { effect: "fade", duration: 500 }
-				});
-			$("#pet-name-ok").click(function()
+			$.ui.dialog.prototype._title = function(title)
 			{
-				$("#pet-name-dialog").dialog("close");
-			});*/
+				title.html(this.options.title);
+			};
 
-		   $("#pet-name-dialog").dialog(
+			$.extend($.ui.dialog.prototype.options,
+			{
+				dialogClass: "no-close",
+			    modal: true,
+			    resizable: false,
+			    draggable: false
+			});
+
+			$("#pet-name-dialog").dialog(
 			{
 				buttons:
 				[{

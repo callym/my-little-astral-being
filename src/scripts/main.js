@@ -4,8 +4,8 @@
 
 $(document).ready(function()
 {
-	var runOnDOMChange = [];
-	var setInvervalsArray = [];
+	runOnDOMChangeArray = [];
+	setInvervalsArray = [];
 	setIntervals = function(arr)
 	{
 		if ($.inArray(arr[0], setInvervalsArray) == -1);
@@ -15,20 +15,33 @@ $(document).ready(function()
 		}
 	}
 
-	var observer = new window.MutationObserver(function(mutations, observer)
+	runOnDOMChange = function(func)
 	{
-		for (var i = 0; i < runOnDOMChange.length; i++)
+		if ($.inArray(func, runOnDOMChangeArray) == -1);
 		{
-			runOnDOMChange[i]();
+			runOnDOMChangeArray.push(func);
+			func();
+		}
+	}
+
+	observer = new window.MutationObserver(function(mutations, observer)
+	{
+		for (var i = 0; i < runOnDOMChangeArray.length; i++)
+		{
+			//runOnDOMChangeArray[i]();
 		}
 	});
 
-// define what element should be observed by the observer
-// and what types of mutations trigger the callback
 	observer.observe(document,
 	{
 		subtree: true,
 		attributes: true
 	});
-//=require ui/**/*.js
+
+	//=require ui/**/*.js
+
+	$("body").fadeIn(1000, function()
+	{
+		$("body").removeClass("hideOpacity");
+	});
 });

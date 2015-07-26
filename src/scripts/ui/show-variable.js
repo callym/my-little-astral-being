@@ -64,7 +64,7 @@ function updateElements()
 	}
 };
 
-runOnDOMChange.push(function()
+runOnDOMChange(function()
 {
 	updateLists.show = document.querySelectorAll("[data-showvariable]");
 	updateLists.iftrue = document.querySelectorAll("[data-iftrue]");

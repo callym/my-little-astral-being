@@ -4,7 +4,7 @@
 "long, wavy mane",
 "short, spiky do",
 "slick, smooth bob"
-]}'></a>
+]}'>OK</a>
 */
 
 if (typeof updateLists == "undefined")
@@ -13,31 +13,35 @@ if (typeof updateLists == "undefined")
 }
 updateLists.OK = [];
 
-runOnDOMChange.push(function()
+runOnDOMChange(function()
 {
 	var newUpdateList = document.querySelectorAll("[data-setvariable]");
 
+	if (EqualArrays(newUpdateList, updateLists.OK))
+	{
+		return;
+	}
+
 	for (var i = 0; i < newUpdateList.length; i++)
 	{
-		if (updateLists.OK.indexOf(newUpdateList[i]) == -1)
+		if (typeof updateLists.OK == "undefined")
 		{
-			var t = newUpdateList[i];
-			var qt = $(t);
-			qt.data("triggered", false);
-			qt.click(function(event)
-			{
-				var t = $(this);
-				HTMLtoVariable(this);
-
-			    if (!t.data("repeat"))
-			    {
-			    	t.off(event);
-			    	t.addClass("fired");
-			    }
-			    console.log("fired");
-			});
+			updateLists.OK = newUpdateList;
 		}
+
+		if (updateLists.OK.indexOf(newUpdateList[i]) != -1)
+		{
+			continue;
+		}
+
+		var qt = $(newUpdateList[i]);
+		qt.click(function(event)
+		{
+			HTMLtoVariable(this);
+		});
 	}
+
+	updateLists.OK = newUpdateList;
 });
 
 function HTMLtoVariable(t)
@@ -49,7 +53,7 @@ function HTMLtoVariable(t)
 
 	if (vType === "desc")
 	{
-		var text = e.innerHTML;
+		var text = e.innerText;
 		var exp = v + " = '" + text + "'";
 		eval(exp);
 	}

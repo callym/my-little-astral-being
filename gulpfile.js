@@ -1,8 +1,9 @@
-var gulp 	= require('gulp'),
-	connect = require('gulp-connect'),
-	watch 	= require('gulp-watch'),
-	sass 	= require('gulp-sass'),
-	include = require('gulp-include');
+var gulp 			= require('gulp'),
+	connect 		= require('gulp-connect'),
+	watch 			= require('gulp-watch'),
+	sass 			= require('gulp-sass'),
+	autoprefixer 	= require('gulp-autoprefixer'),
+	include 		= require('gulp-include');
 
 gulp.task('webserver', function() {
 	connect.server({
@@ -20,6 +21,7 @@ gulp.task('livereload', function() {
 gulp.task('sass', function() {
 	gulp.src('src/styles/main.scss')
 		.pipe(sass())
+		.pipe(autoprefixer())
 		.pipe(gulp.dest('build/styles'));
 });
 

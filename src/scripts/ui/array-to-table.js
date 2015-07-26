@@ -52,8 +52,8 @@ function updateTable()
 	}
 };
 
-runOnDOMChange.push(function()
+runOnDOMChange(function()
 {
 	updateLists.tables = document.querySelectorAll("[data-arraytotable]");
-	setIntervals(updateTable, 10);
+	setIntervals([updateTable, 10]);
 });

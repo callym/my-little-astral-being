@@ -2,11 +2,21 @@
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700,700italic);
 
-$ubuntu-mono: "Ubuntu Mono";
+$main-font: "Ubuntu Mono";
 
 body
 {
-	font-family: $ubuntu-mono;
+	font-family: $main-font;
+}
+
+.ui-button-text
+{
+	font-family: $main-font;
+}
+
+.no-close .ui-dialog-titlebar-close
+{
+  display: none;
 }
 
 [data-setvariable]
@@ -27,6 +37,11 @@ body
 .hide
 {
 	display: none;
+}
+
+.hideOpacity
+{
+	opacity: 0;
 }
 
 $browsercorner-position: fixed;

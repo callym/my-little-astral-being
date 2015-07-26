@@ -5,6 +5,11 @@ function Species()
 	this.elements = [];
 };
 
+Species.prototype.articleName = function()
+{
+	return AvsAnSimple.query(this.name) + " " + this.name;
+};
+
 CreateSpecies = function(o)
 {
 	var s = new Species();
