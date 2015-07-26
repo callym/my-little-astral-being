@@ -1,30 +1,59 @@
 function Elements()
 {
-	this.Light 	= new Element("Light");
-	this.Dark 	= new Element("Dark");
+	this.Air 	= new Element("Air");
+	this.Earth 	= new Element("Earth");
+	this.Fire 	= new Element("Fire");
+	this.Water 	= new Element("Water");
+	this.Spirit = new Element("Spirit");
+};
 
-	this.toArray = function()
+Elements.prototype.toArray = function()
+{
+	return [this.Air, this.Earth, this.Fire, this.Water, this.Spirit];
+};
+
+Elements.prototype.changeMaximumFromArray = function(arr)
+{
+	var elements = this.toArray();
+	if (arr.length != elements.length)
 	{
-		return [this.Light, this.Dark];
-	};
-
-	this.toString = function()
+		return;
+	}
+	for (var i = 0; i < arr.length; i++)
 	{
-		var arr = this.toArray();
-		var s = "";
-
-		for (var i = 0; i < arr.length; i++)
-		{
-			s += arr[i].name + ": " + arr[i].level.current + "/" + arr[i].level.maximum;
-			if (i != arr.length - 1)
-			{
-				s += ", ";
-			}
-		}
-
-		return s;
+		elements[i].level.changeMaximum(arr[i]);
 	}
 };
+
+Elements.prototype.setMaximumFromArray = function(arr)
+{
+	var elements = this.toArray();
+	if (arr.length != elements.length)
+	{
+		return;
+	}
+	for (var i = 0; i < arr.length; i++)
+	{
+		elements[i].level.setMaximum(arr[i]);
+	}
+};
+
+Elements.prototype.toString = function()
+{
+	var arr = this.toArray();
+	var s = "";
+
+	for (var i = 0; i < arr.length; i++)
+	{
+		s += arr[i].name + ": " + arr[i].level.current + "/" + arr[i].level.maximum;
+		if (i != arr.length - 1)
+		{
+			s += ", ";
+		}
+	}
+
+	return s;
+}
 
 function Element(name, level)
 {

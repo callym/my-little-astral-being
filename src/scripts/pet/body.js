@@ -1,7 +1,9 @@
 //=require species.js
 
-function Body()
+function Body(pet)
 {
+	this.pet = pet;
+
 	this.species = this.NewSpecies();
 
 	this.energy = new SettableInt(10);
@@ -9,27 +11,42 @@ function Body()
 
 Body.prototype.SubSpecies =
 [
-	{Name: ""},
-	{Name: "mer"},
-	{Name: "were"},
-	{Name: "cyber"}
+	/* [AIR, EARTH, FIRE, WATER, SPIRIT] */
+	/* air */
+	{Name: "Amethyst",		Elements: [10, 0, 0, 0, 0]},
+	{Name: "Topaz", 		Elements: [10, 0, 0, 0, 0]},
+	{Name: "Turquoise", 	Elements: [10, 0, 0, 0, 0]},
+
+	/* earth */
+	{Name: "Emerald", 		Elements: [0, 10, 0, 0, 0]},
+	{Name: "Jade", 			Elements: [0, 10, 0, 0, 0]},
+	{Name: "Obsidian", 		Elements: [0, 10, 0, 0, 0]},
+
+	/* fire */
+	{Name: "Citrine", 		Elements: [0, 0, 10, 0, 0]},
+	{Name: "Ruby", 			Elements: [0, 0, 10, 0, 0]},
+	{Name: "Sunstone", 		Elements: [0, 0, 10, 0, 0]},
+
+	/* water */
+	{Name: "Lapis Lazuli", 	Elements: [0, 0, 0, 10, 0]},
+	{Name: "Pearl", 		Elements: [0, 0, 0, 10, 0]},
+	{Name: "Sapphire", 		Elements: [0, 0, 0, 10, 0]},
+
+	/* spirit */
+	{Name: "Jet", 			Elements: [0, 0, 0, 0, 10]},
+	{Name: "Diamond", 		Elements: [0, 0, 0, 0, 10]},
+	{Name: "Quartz", 		Elements: [0, 0, 0, 0, 10]}
 ];
 
 Body.prototype.Species =
 [
-	{Name: "cat"}
+	{Name: "cat"},
+	{Name: "flower"}
 ];
 
 Body.prototype.NewSpecies = function()
 {
-	var chance = 0.5;
-	var rand = Math.random();
-
-	var subSpecies = CreateSpecies(this.SubSpecies[0]); /* empty sub-species */
-	if (rand > chance)
-	{
-		subSpecies = CreateSpecies(GetRandomFromArray(this.SubSpecies));
-	}
+	var subSpecies = CreateSpecies(GetRandomFromArray(this.SubSpecies));
 	var topSpecies = CreateSpecies(GetRandomFromArray(this.Species));
 
 	return AddSpecies(subSpecies, topSpecies);

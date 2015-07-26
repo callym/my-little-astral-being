@@ -1,8 +1,10 @@
 //=require element.js
 
-function Soul()
+function Soul(pet)
 {
-	this.elements = CreateRandomiseElements();
+	this.pet = pet;
+
+	this.elements = new Elements();
 
 	this.mana = new SettableInt(10);
 };
