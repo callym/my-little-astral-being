@@ -7,23 +7,37 @@
 ]}'></a>
 */
 
-$("[data-setvariable]").each(function()
+if (typeof updateLists == "undefined")
 {
-	var t = $(this);
-	this.innerHTML = "OK";
-	t.data("triggered", false);
-	t.click(function(event)
-	{
-		var t = $(this);
-		HTMLtoVariable(this);
+	updateLists = {};
+}
+updateLists.OK = [];
 
-	    if (!t.data("repeat"))
-	    {
-	    	t.off(event);
-	    	t.addClass("fired");
-	    }
-	    console.log("fired");
-	});
+runOnDOMChange.push(function()
+{
+	var newUpdateList = document.querySelectorAll("[data-setvariable]");
+
+	for (var i = 0; i < newUpdateList.length; i++)
+	{
+		if (updateLists.OK.indexOf(newUpdateList[i]) == -1)
+		{
+			var t = newUpdateList[i];
+			var qt = $(t);
+			qt.data("triggered", false);
+			qt.click(function(event)
+			{
+				var t = $(this);
+				HTMLtoVariable(this);
+
+			    if (!t.data("repeat"))
+			    {
+			    	t.off(event);
+			    	t.addClass("fired");
+			    }
+			    console.log("fired");
+			});
+		}
+	}
 });
 
 function HTMLtoVariable(t)
@@ -59,4 +73,4 @@ function HTMLtoVariable(t)
     {
         $(e).attr("contenteditable", "false");
     }
-}
+};

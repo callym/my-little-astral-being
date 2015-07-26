@@ -7,24 +7,47 @@
 
 		<link rel="stylesheet" href="/styles/main.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script src="scripts/main.js"></script>
 	</head>
 	<body>
-		Your pet's name is <span id="pet-name" contenteditable="true">Fluffy</span>.
-		<a data-setvariable='{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }'></a>
+		<div id="pet-name-dialog">
+			Your pet's name is <span id="pet-name" contenteditable="true">Fluffy</span>.
+			<a id="pet-name-ok" data-setvariable='{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }'></a>
+		</div>
 
 		<div>
 		<span data-showvariable="pet.name"></span> is a <span data-showvariable="pet.body.species.name"></span>
 		</div>
 
-		<div>
-		<span data-showvariable="pet.soul.elements.toString()"></span>
-		</div>
-
-		<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
+		<table class="bottomright" data-arraytotable="pet.soul.elements.toTableArray()"></table>
 
 		<script type="text/javascript">
+		$(function()
+		{
+			/*$("#pet-name-dialog").dialog(
+				{
+					hide: { effect: "fade", duration: 500 }
+				});
+			$("#pet-name-ok").click(function()
+			{
+				$("#pet-name-dialog").dialog("close");
+			});*/
 
+		   $("#pet-name-dialog").dialog(
+			{
+				buttons:
+				[{
+					'data-setvariable':'{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }',
+					text: "OK",
+					click: function()
+					{
+						$(this).dialog( "close" );
+					}
+				}],
+				hide: { effect: "fade", duration: 500 }
+			});
+		});
 		</script>
 	</body>
 </html>

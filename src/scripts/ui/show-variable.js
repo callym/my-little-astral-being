@@ -64,9 +64,9 @@ function updateElements()
 	}
 };
 
-updateLists.show = document.querySelectorAll("[data-showvariable]");
-updateLists.iftrue = document.querySelectorAll("[data-iftrue]");
-setInterval(function()
+runOnDOMChange.push(function()
 {
-	updateElements();
-}, 10);
+	updateLists.show = document.querySelectorAll("[data-showvariable]");
+	updateLists.iftrue = document.querySelectorAll("[data-iftrue]");
+	setIntervals([updateElements, 10]);
+});
