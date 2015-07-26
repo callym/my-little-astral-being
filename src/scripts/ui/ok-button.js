@@ -1,5 +1,5 @@
 /*
-<a data-cyclinglink='{ "variable": "player.appearance.hair.style", "type": "desc",
+<a data-setvariable='{ "variable": "player.appearance.hair.style", "type": "desc",
 "options": [
 "long, wavy mane",
 "short, spiky do",

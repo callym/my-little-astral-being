@@ -6,6 +6,8 @@
 	...
 	[COLUMN 1 DATA N 	...		COLUMN N DATA N]
 	]
+
+	<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
 */
 
 if (typeof updateLists == "undefined")

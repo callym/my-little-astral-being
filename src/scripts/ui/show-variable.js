@@ -1,3 +1,7 @@
+/*
+<span data-showvariable="pet.soul.elements.toString()"></span>
+*/
+
 if (typeof updateLists == "undefined")
 {
 	updateLists = {};
