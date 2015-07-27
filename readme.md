@@ -13,3 +13,7 @@ start off with an egg (crystal) that's one of x colours where each colour then c
 
 
 the better you are at looking after your astral being, the quicker it is strong enough to escape its material form 
+
+only use black and pastel colours
+
+all interface is through a pie menu that appears when you click on your pet
