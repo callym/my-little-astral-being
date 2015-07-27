@@ -1,3 +1,4 @@
+//=require sprite.js
 //=require soul.js
 //=require body.js
 

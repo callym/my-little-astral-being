@@ -17,10 +17,11 @@
 
 		<div>
 		<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
-
 		</div>
 
 		<table class="bottomright" data-arraytotable="pet.soul.elements.toTableArray()"></table>
+
+		<canvas id="petcanvas"></canvas>
 
 		<script type="text/javascript">
 		$(function()
@@ -33,9 +34,9 @@
 			$.extend($.ui.dialog.prototype.options,
 			{
 				dialogClass: "no-close",
-			    modal: true,
-			    resizable: false,
-			    draggable: false
+				modal: true,
+				resizable: false,
+				draggable: false
 			});
 
 			$("#pet-name-dialog").dialog(

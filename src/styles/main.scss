@@ -7,6 +7,13 @@ $main-font: "Ubuntu Mono";
 body
 {
 	font-family: $main-font;
+	color: white;
+	background-color: black;
+}
+
+#petcanvas
+{
+	z-index: -10;
 }
 
 .ui-button-text
