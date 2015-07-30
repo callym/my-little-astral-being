@@ -20,7 +20,7 @@ gulp.task('livereload', function() {
 
 gulp.task('sass', function() {
 	gulp.src('src/styles/main.scss')
-		.pipe(sass())
+		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer())
 		.pipe(gulp.dest('build/styles'));
 });

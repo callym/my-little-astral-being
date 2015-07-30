@@ -9,8 +9,8 @@ $(function()
 	var winHeight 	= window.innerHeight 	* dip;
 
 	var canvas = document.querySelector("#petcanvas");
-	var appWidth 	= 1000;
-	var appHeight 	= 1000;
+	var appWidth 	= 1024;
+	var appHeight 	= 512;
 	canvas.width = winWidth;
 	canvas.height = winHeight;
 	canvas.style.position = "absolute";
@@ -55,6 +55,11 @@ $(function()
 	{
 		requestAnimationFrame(animate);
 		renderer.render(container);
+	};
+
+	window.getScale = function getScale()
+	{
+		return (renderer.width / appWidth);
 	};
 
 	// The re-size method

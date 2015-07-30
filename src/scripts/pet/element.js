@@ -24,6 +24,18 @@ Elements.prototype.toTableArray = function()
 	return t;
 };
 
+Elements.prototype.toListArray = function()
+{
+	var t = ["Elements"];
+	var arr = this.toArray()
+	for (var i = 0; i < arr.length; i++)
+	{
+		t.push(arr[i].name + "(" + arr[i].level.current + "/" + arr[i].level.maximum + ")");
+	}
+
+	return t;
+};
+
 Elements.prototype.changeMaximumFromArray = function(arr)
 {
 	var elements = this.toArray();

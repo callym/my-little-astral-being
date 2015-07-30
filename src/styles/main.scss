@@ -1,4 +1,4 @@
-@import "jquery-ui.structure", "jquery-ui.theme";
+@import "jquery-ui.structure", "jquery-ui.theme", "radial-menu";
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700,700italic);
 
@@ -60,3 +60,16 @@ $browsercorner-padding: 10px;
 .topright { position: $browsercorner-position; top: $browsercorner-padding; right:  $browsercorner-padding; }
 
 .bottomright { position: $browsercorner-position; bottom: $browsercorner-padding; right:  $browsercorner-padding; }
+
+.center-container
+{
+	position: relative;
+}
+
+.center
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

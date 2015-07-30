@@ -45,4 +45,9 @@ $(document).ready(function()
 	{
 		$("body").removeClass("hideOpacity");
 	});
+
+	for (var i = 0; i < runOnDOMChangeArray.length; i++)
+	{
+		runOnDOMChangeArray[i]();
+	}
 });
