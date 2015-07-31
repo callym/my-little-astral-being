@@ -11,6 +11,25 @@ function updateRadialMenu()
 	{
 		var curUpdate = updateLists.radialMenu[i];
 		var value = eval(curUpdate.dataset.arraytoradialmenu);
+
+		if (value[0] == "html" && updateLists.radialMenuVariable[i] != "html")
+		{
+			curUpdate.innerHTML = "";
+			while (value[1].childNodes.length)
+			{
+			    curUpdate.appendChild(value[1].childNodes[0]);
+			}
+			curUpdate.dataset.arraytoradialmenu = true;
+			calculateAllElementPositions(curUpdate);
+			updateLists.radialMenuVariable[i] = "html";
+			continue;
+		}
+
+		if (updateLists.radialMenuVariable[i] == "html")
+		{
+			continue;
+		}
+
 		if (EqualArrays(updateLists.radialMenuVariable[i], value))
 		{
 			continue;
@@ -18,35 +37,50 @@ function updateRadialMenu()
 
 		updateLists.radialMenuVariable[i] = value;
 
-		var circle = document.createElement("ul");
+		var circle = document.createElement("div");
 		circle.classList.add("circle");
+		circle.classList.add("center");
 		curUpdate.appendChild(circle);
 
 		for (var i = 0; i < value.length; i++)
 		{
 			if (i == 0)
 			{
-				var item = document.createElement("a");
-				item.appendChild(document.createTextNode(value[i]));
-				item.onclick = function(e)
+				if (curUpdate.dataset.submenu)
 				{
-					e.preventDefault();
-					circle.classList.toggle("open");
-				};
-				item.classList.add("menu-button");
+					curUpdate.onclick = function(e)
+					{
+						e.stopPropagation();
+						circle.classList.toggle("open");
+					};
+					curUpdate.classList.add("menu-button");
+				}
+				else
+				{
+					var item = document.createElement("a");
+					item.appendChild(document.createTextNode(value[i]));
+					item.onclick = function(e)
+					{
+						e.stopPropagation();
+						circle.classList.toggle("open");
+					};
+					item.classList.add("menu-button");
 
-				curUpdate.appendChild(item);
+					curUpdate.appendChild(item);
+				}
 			}
 
 			else
 			{
-				var item = document.createElement("li");
-
-				item.appendChild(document.createTextNode(value[i]));
-
+				var item = document.createElement("div");
+				item.innerHTML = value[i];
+				item.classList.add("item");
+				item.onclick = function(e)
+				{
+					e.stopPropagation();
+				};
 				// take one bc we're ignoring the first element of the array
 				calculateElementPosition(item, i - 1, value.length - 1);
-
 				circle.appendChild(item);
 			}
 		}
@@ -60,8 +94,20 @@ function calculateElementPosition(item, i, total)
 
 	var radius = 75 * getScale();
 	item.style.left = (50 - (radius * (Math.cos(radians)))).toFixed(4) + "%";
+	item.style.marginLeft = -($(item).getRealDimensions().width / 2) + "px";
 	item.style.top = (50 + (radius * (Math.sin(radians)))).toFixed(4) + "%";
 };
+
+function calculateAllElementPositions(element)
+{
+	var listItems = $(element).children(".circle").children("div")
+	var length = listItems.length;
+
+	listItems.each(function(i)
+	{
+		calculateElementPosition(this, i, length);
+	});
+}
 
 window.addEventListener('resize',
 function()
@@ -70,7 +116,7 @@ function()
 	{
 		var curUpdate = updateLists.radialMenu[i];
 
-		var listItems = $(curUpdate).children(".circle").children("li")
+		var listItems = $(curUpdate).children(".circle").children("div")
 		var length = listItems.length;
 
 		listItems.each(function(i)

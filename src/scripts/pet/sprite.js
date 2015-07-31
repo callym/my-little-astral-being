@@ -6,6 +6,7 @@ function changePetSprite(spriteName)
 	.load(function(loader, resources)
 	{
 		pet.sprite = new PIXI.Sprite();
+		pet.sprite.interactive = true;
 		pet.sprite.texture = resources[spriteName].texture;
 		container.addChild(pet.sprite);
 
@@ -14,6 +15,13 @@ function changePetSprite(spriteName)
 		pet.sprite.pivot.x = pet.sprite.width / 2;
 		pet.sprite.pivot.y = pet.sprite.height/ 2;
 		pet.sprite.position = centerPoint;
+
+		pet.sprite.on('click', function (e)
+		{
+			//var s = (pet.sprite.textureName == "diamond") ? "egg" : "diamond";
+			//changePetSprite(s);
+			$("#menu").children(".menu-button").click();
+		});
 
 		PIXI.loader.reset();
 	});

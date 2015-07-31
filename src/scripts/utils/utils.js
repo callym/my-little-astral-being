@@ -44,6 +44,10 @@ function EqualArrays(arr1, arr2)
 
     for (var i = 0; i < arr1.length; i++)
     {
+        if (typeof arr1[i] == "undefined" || typeof arr2[i] == "undefined")
+        {
+            return false;
+        }
         if (arr1[i].constructor == Array && arr2[i].constructor == Array)
         {
             var subarray = EqualArrays(arr1[i], arr2[i]);
@@ -58,4 +62,23 @@ function EqualArrays(arr1, arr2)
         }
     }
     return true;
+}
+
+$.fn.getRealDimensions = function (outer) {
+    var $this = $(this);
+    if ($this.length == 0) {
+        return false;
+    }
+    var $clone = $this.clone()
+        .show()
+        .css('visibility','hidden')
+        .insertAfter($this);
+    var result = {
+        width:      (outer) ? $clone.outerWidth() : $clone.innerWidth(),
+        height:     (outer) ? $clone.outerHeight() : $clone.innerHeight(),
+        offsetTop:  $clone.offset().top,
+        offsetLeft: $clone.offset().left
+    };
+    $clone.remove();
+    return result;
 }

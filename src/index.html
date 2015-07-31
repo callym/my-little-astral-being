@@ -21,7 +21,7 @@
 
 		<table class="bottomright" data-arraytotable="pet.soul.elements.toTableArray()"></table>
 
-		<div class="center" data-arraytoradialmenu="pet.soul.elements.toListArray()"></div>
+		<div id="menu" class="center" data-arraytoradialmenu="pet.menu.toHTML()"></div>
 
 		<canvas id="petcanvas"></canvas>
 
@@ -49,6 +49,8 @@
 					text: "OK",
 					click: function()
 					{
+						// hack to make sure small layout things work
+						window.dispatchEvent(new Event("resize"));
 						$(this).dialog( "close" );
 					}
 				}],

@@ -39,14 +39,11 @@ $(function()
 	container.addChild(dirLight);
 	container.addChild(new PIXI.lights.AmbientLight(0xffffff, 0.4));
 
-	renderer.view.addEventListener('mousemove', function (e) {
+	renderer.view.addEventListener('mousemove', function (e)
+	{
 		var rect = e.target.getBoundingClientRect();
 		light.position.x = e.clientX - rect.left;
 		light.position.y = e.clientY - rect.top;
-	});
-	renderer.view.addEventListener('click', function (e) {
-		var s = (pet.sprite.textureName == "diamond") ? "egg" : "diamond";
-		changePetSprite(s);
 	});
 
 	animate();

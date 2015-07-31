@@ -12,9 +12,26 @@ $(document).ready(function()
 		if ($.inArray(arr[0], setInvervalsArray) == -1);
 		{
 			setInvervalsArray.push(arr);
-			setInterval(arr[0], arr[1]);
+			//setInterval(arr[0], arr[1]);
 		}
 	}
+	window.runSetIntervals = function()
+	{
+		for (var i = 0; i < setInvervalsArray.length; i++)
+		{
+			setInvervalsArray[i][0]();
+		}
+	};
+	setInterval(runSetIntervals, 50);
+
+	window.runSetIntervalsLong = function()
+	{
+		for (var i = 0; i < runOnDOMChangeArray.length; i++)
+		{
+			runOnDOMChangeArray[i]();
+		}
+	};
+	setInterval(runSetIntervalsLong, 500);
 
 	runOnDOMChange = function(func)
 	{
@@ -45,9 +62,4 @@ $(document).ready(function()
 	{
 		$("body").removeClass("hideOpacity");
 	});
-
-	for (var i = 0; i < runOnDOMChangeArray.length; i++)
-	{
-		runOnDOMChangeArray[i]();
-	}
 });

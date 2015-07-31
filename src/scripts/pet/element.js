@@ -30,10 +30,24 @@ Elements.prototype.toListArray = function()
 	var arr = this.toArray()
 	for (var i = 0; i < arr.length; i++)
 	{
-		t.push(arr[i].name + "(" + arr[i].level.current + "/" + arr[i].level.maximum + ")");
+		t.push(arr[i].name + "<br/>(" + arr[i].level.current + "/" + arr[i].level.maximum + ")");
 	}
 
 	return t;
+};
+
+Elements.prototype.toMenu = function(parent)
+{
+	var menu = new Menu(parent);
+
+	var arr = this.toListArray();
+	//arr[0] = "<div data-arraytoradialmenu='pet.soul.elements.toListArray()'></div>"
+	for (var i = 0; i < arr.length; i++)
+	{
+		menu.NewOptionFromHTML(arr[i]);
+	}
+
+	return menu;
 };
 
 Elements.prototype.changeMaximumFromArray = function(arr)

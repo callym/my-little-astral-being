@@ -10,6 +10,10 @@ function Pet(petName)
     this.body = new Body(this);
 
     this.soul.elements.setMaximumFromArray(this.body.species.elements);
+
+    this.menu = new Menu();
+    this.menu.NewOptionFromHTML("BLAH");
+    this.menu.NewSubmenu("Elements", "pet.soul.elements.toListArray()");
 };
 
 pet = new Pet("");
