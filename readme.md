@@ -16,4 +16,6 @@ the better you are at looking after your astral being, the quicker it is strong 
 
 only use black and pastel colours
 
-all interface is through a pie menu that appears when you click on your pet
+~~all interface is through a pie menu that appears when you click on your pet~~
+
+interface fades out (maybe blurs???) when you open a submenu, can only click on the current menu items and the menu item that you clicked to get there (to return you)
