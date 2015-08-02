@@ -46,6 +46,13 @@ $(function()
 		light.position.y = e.clientY - rect.top;
 	});
 
+	renderer.view.addEventListener('click', function (e)
+	{
+		//var s = (pet.sprite.textureName == "diamond") ? "egg" : "diamond";
+		//changePetSprite(s);
+		$("#menu").children(".menu-button").click();
+	});
+
 	animate();
 
 	function animate()

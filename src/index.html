@@ -11,23 +11,33 @@
 		<script src="scripts/main.js"></script>
 	</head>
 	<body class="hide">
+		<div id="overlay"><div id="overlay-box"></div></div>
 		<div id="pet-name-dialog" title="You found an egg!">
 			Your pet's name is <span id="pet-name" contenteditable="true">Fluffy</span>.
 		</div>
 
-		<div>
-		<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
-		</div>
-
-		<table class="bottomright" data-arraytotable="pet.soul.elements.toTableArray()"></table>
-
-		<div id="menu" class="center" data-arraytoradialmenu="pet.menu.toHTML()"></div>
-
 		<canvas id="petcanvas"></canvas>
+
+		<div class="bottom">
+		<div id="menu">
+			<ul>
+				<li><a href="#pet-data">data</a></li>
+				<li><a href="#pet-element-stats">elements</a></li>
+			</ul>
+			<div id="pet-data">
+				<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
+			</div>
+			<div id="pet-element-stats">
+				<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
+			</div>
+		</div>
+		</div>
 
 		<script type="text/javascript">
 		$(function()
 		{
+			$("#menu").tabs();
+
 			$.ui.dialog.prototype._title = function(title)
 			{
 				title.html(this.options.title);
@@ -50,7 +60,7 @@
 					click: function()
 					{
 						// hack to make sure small layout things work
-						window.dispatchEvent(new Event("resize"));
+						//window.dispatchEvent(new Event("resize"));
 						$(this).dialog( "close" );
 					}
 				}],

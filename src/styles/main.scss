@@ -1,14 +1,79 @@
-@import "jquery-ui.structure", "jquery-ui.theme", "radial-menu";
+@import "jquery-ui.structure", "jquery-ui.theme";
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700,700italic);
 
 $main-font: "Ubuntu Mono";
+$background-colour: black;
+$main-colour: white;
+$compliment-colour: green;
 
 body
 {
 	font-family: $main-font;
-	color: white;
-	background-color: black;
+	color: $main-colour;
+	background-color: $background-colour;
+	max-height: 90vh;
+}
+
+#menu {
+	margin: 0 auto;
+	width: 50%;
+	position: relative;
+	padding-bottom: 3em;
+
+	background: transparent;
+	border: none;
+
+	.ui-widget-header
+	{
+		background: transparent;
+		border: none;
+	}
+
+	.ui-widget-content
+	{
+		color: $main-colour;
+		border-bottom: 1px solid #c0c0c0;
+	}
+
+	.ui-tabs-nav
+	{
+		position: absolute;
+		left: 0.25em;
+		right: 0.25em;
+		bottom: 0.25em;
+		padding: 0em 0.2em 0.2em;
+
+		height: 2.35em;
+		text-align: center;
+
+		li
+		{
+			display: inline-block;
+			float: none;
+			top: 0px;
+			margin: 0em;
+		}
+
+		.ui-state-default
+		{
+			background: transparent;
+			border: none;
+			a
+			{
+				color: $main-colour;
+			}
+		}
+		.ui-state-active
+		{
+			background: transparent;
+			border: none;
+			a
+			{
+				color: $compliment-colour;
+			}
+		}
+	}
 }
 
 #petcanvas
@@ -46,13 +111,12 @@ body
 	display: none;
 }
 
-.hideOpacity
-{
-	opacity: 0;
-}
-
 $browsercorner-position: fixed;
 $browsercorner-padding: 10px;
+.top { position: $browsercorner-position; top: $browsercorner-padding; width: 100%; }
+
+.bottom { position: $browsercorner-position; bottom: $browsercorner-padding; width: 100% }
+
 .topleft { position: $browsercorner-position; top: $browsercorner-padding; left:  $browsercorner-padding; }
 
 .bottomleft { position: $browsercorner-position; bottom: $browsercorner-padding; left:  $browsercorner-padding; }
@@ -60,11 +124,6 @@ $browsercorner-padding: 10px;
 .topright { position: $browsercorner-position; top: $browsercorner-padding; right:  $browsercorner-padding; }
 
 .bottomright { position: $browsercorner-position; bottom: $browsercorner-padding; right:  $browsercorner-padding; }
-
-.center-container
-{
-	position: relative;
-}
 
 .center
 {

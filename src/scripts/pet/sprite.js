@@ -16,13 +16,6 @@ function changePetSprite(spriteName)
 		pet.sprite.pivot.y = pet.sprite.height/ 2;
 		pet.sprite.position = centerPoint;
 
-		pet.sprite.on('click', function (e)
-		{
-			//var s = (pet.sprite.textureName == "diamond") ? "egg" : "diamond";
-			//changePetSprite(s);
-			$("#menu").children(".menu-button").click();
-		});
-
 		PIXI.loader.reset();
 	});
 };

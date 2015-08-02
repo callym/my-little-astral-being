@@ -32,6 +32,11 @@ function Shuffle(array) {
 
 function EqualArrays(arr1, arr2)
 {
+    if (arr1 == null || arr2 == null)
+    {
+        return false;
+    }
+
     if (typeof arr1 == "undefined" || typeof arr2 == "undefined")
     {
         return false;
@@ -48,12 +53,16 @@ function EqualArrays(arr1, arr2)
         {
             return false;
         }
-        if (arr1[i].constructor == Array && arr2[i].constructor == Array)
+
+        if (arr1[i] != null && arr2[i] != null)
         {
-            var subarray = EqualArrays(arr1[i], arr2[i]);
-            if (subarray == false)
+            if (arr1[i].constructor == Array && arr2[i].constructor == Array)
             {
-                return false;
+                var subarray = EqualArrays(arr1[i], arr2[i]);
+                if (subarray == false)
+                {
+                    return false;
+                }
             }
         }
         else if (arr1[i] != arr2[i])
