@@ -1,5 +1,4 @@
 //=require pixi.js
-//=require pixi-extra-filters.js
 //=require pixi-lights.js
 
 $(function()

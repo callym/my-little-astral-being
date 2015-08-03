@@ -58,17 +58,24 @@ function EqualArrays(arr1, arr2)
             return false;
         }
 
-        if (arr1[i] != null && arr2[i] != null)
+        if (arr1[i] == null || arr2[i] == null)
         {
-            if (arr1[i].constructor == Array && arr2[i].constructor == Array)
+            if (arr1[i] == null && arr2[i] == null)
             {
-                var subarray = EqualArrays(arr1[i], arr2[i]);
-                if (subarray == false)
-                {
-                    return false;
-                }
+                continue;
+            }
+            return false;
+        }
+
+        if (arr1[i].constructor == Array && arr2[i].constructor == Array)
+        {
+            var subarray = EqualArrays(arr1[i], arr2[i]);
+            if (subarray == false)
+            {
+                return false;
             }
         }
+
         if (arr1[i] != arr2[i])
         {
             return false;
@@ -111,3 +118,37 @@ ElementColours =
     spirit :    new ElementColour("0xEC6A94"),
     water :     new ElementColour("0x82C9C5")
 };
+
+function GetFunction(string, run)
+{
+    run = run || true;
+    var isFunction = false;
+    string = string.split(".").reduce(
+        function(p, c)
+        {
+            if (c.indexOf("()") > -1)
+            {
+                isFunction = true;
+                c = c.split("()")[0];
+            }
+            return p[c];
+        }, window);
+
+    if (isFunction && run)
+    {
+        string = string["call"]();
+    }
+    return string;
+};
+
+function GetXPath(element)
+{
+    var xpath = '';
+    for ( ; element && element.nodeType == 1; element = element.parentNode )
+    {
+        var id = $(element.parentNode).children(element.tagName).index(element) + 1;
+        id > 1 ? (id = '[' + id + ']') : (id = '');
+        xpath = '/' + element.tagName.toLowerCase() + id + xpath;
+    }
+    return xpath;
+}

@@ -1,106 +1,91 @@
 function Elements()
 {
-	this.Air 	= new Element("air");
-	this.Earth 	= new Element("earth");
-	this.Fire 	= new Element("fire");
-	this.Water 	= new Element("water");
-	this.Spirit = new Element("spirit");
+	var self = this;
+	this.air 	= new Element("air");
+	this.earth 	= new Element("earth");
+	this.fire 	= new Element("fire");
+	this.water 	= new Element("water");
+	this.spirit = new Element("spirit");
 
-	this.previousArray = null;
-};
-
-Elements.prototype.toArray = function()
-{
-	return [this.Air, this.Earth, this.Fire, this.Water, this.Spirit];
-};
-
-Elements.prototype.toTableArray = function()
-{
-	var t = [];
-	var arr = this.toArray();
-	for (var i = 0; i < arr.length; i++)
+	this.toArray = function()
 	{
-		var max = (arr[i].level.maximum == 0) ? 0.1 : arr[i].level.maximum;
-		var img = "<img src='" + arr[i].sprite + "' height='32' width='32'>";
-		var progress = 	"<progress class='" + arr[i].name +
-						"' max='" + max +
-						"' value='" + arr[i].level.current + "'></progress>"
-		t.push([img, progress, arr[i].level.maximum]);
-	}
+		return [self.air, self.earth, self.fire, self.water, self.spirit];
+	};
 
-	var classes = ["shrink", "", "shrink"];
-
-	return [false, classes, t];
-};
-
-Elements.prototype.toListArray = function()
-{
-	var t = ["Elements"];
-	var arr = this.toArray()
-	for (var i = 0; i < arr.length; i++)
+	this.toTableArray = function()
 	{
-		t.push(arr[i].name + "<br/>(" + arr[i].level.current + "/" + arr[i].level.maximum + ")");
-	}
-
-	return t;
-};
-
-Elements.prototype.toMenu = function(parent)
-{
-	var menu = new Menu(parent);
-
-	var arr = this.toListArray();
-	//arr[0] = "<div data-arraytoradialmenu='pet.soul.elements.toListArray()'></div>"
-	for (var i = 0; i < arr.length; i++)
-	{
-		menu.NewOptionFromHTML(arr[i]);
-	}
-
-	return menu;
-};
-
-Elements.prototype.changeMaximumFromArray = function(arr)
-{
-	var elements = this.toArray();
-	if (arr.length != elements.length)
-	{
-		return;
-	}
-	for (var i = 0; i < arr.length; i++)
-	{
-		elements[i].level.changeMaximum(arr[i]);
-	}
-};
-
-Elements.prototype.setMaximumFromArray = function(arr)
-{
-	var elements = this.toArray();
-	if (arr.length != elements.length)
-	{
-		return;
-	}
-	for (var i = 0; i < arr.length; i++)
-	{
-		elements[i].level.setMaximum(arr[i]);
-	}
-};
-
-Elements.prototype.toString = function()
-{
-	var arr = this.toArray();
-	var s = "";
-
-	for (var i = 0; i < arr.length; i++)
-	{
-		s += arr[i].name + ": " + arr[i].level.current + "/" + arr[i].level.maximum;
-		if (i != arr.length - 1)
+		var t = [];
+		var arr = self.toArray();
+		for (var i = 0; i < arr.length; i++)
 		{
-			s += ", ";
+			var max = (arr[i].level.maximum == 0) ? 0.1 : arr[i].level.maximum;
+			var img = "<img src='" + arr[i].sprite + "' height='32' width='32'>";
+			var progress = 	"<progress data-event='pet:element:" + arr[i].name + ":change' class='" + arr[i].name +
+							"' data-progress='pet.soul.elements." + arr[i].name + ".level'></progress>";
+			var max = "<span data-showvariable=" + arr[i].level.maximum + "></span>"
+			t.push([img, progress, arr[i].level.maximum]);
 		}
-	}
 
-	return s;
-}
+		var classes = ["shrink", "", "shrink"];
+
+		return [false, classes, t];
+	};
+
+	this.toListArray = function()
+	{
+		var t = ["Elements"];
+		var arr = self.toArray()
+		for (var i = 0; i < arr.length; i++)
+		{
+			t.push(arr[i].name + "<br/>(" + arr[i].level.current + "/" + arr[i].level.maximum + ")");
+		}
+
+		return t;
+	};
+
+	this.changeMaximumFromArray = function(arr)
+	{
+		var elements = self.toArray();
+		if (arr.length != elements.length)
+		{
+			return;
+		}
+		for (var i = 0; i < arr.length; i++)
+		{
+			elements[i].level.changeMaximum(arr[i]);
+		}
+	};
+
+	this.setMaximumFromArray = function(arr)
+	{
+		var elements = self.toArray();
+		if (arr.length != elements.length)
+		{
+			return;
+		}
+		for (var i = 0; i < arr.length; i++)
+		{
+			elements[i].level.setMaximum(arr[i]);
+		}
+	};
+
+	this.toString = function()
+	{
+		var arr = self.toArray();
+		var s = "";
+
+		for (var i = 0; i < arr.length; i++)
+		{
+			s += arr[i].name + ": " + arr[i].level.current + "/" + arr[i].level.maximum;
+			if (i != arr.length - 1)
+			{
+				s += ", ";
+			}
+		}
+
+		return s;
+	};
+};
 
 function Element(name, level)
 {
@@ -110,6 +95,44 @@ function Element(name, level)
 	this.level = new SettableInt(level);
 
 	this.sprite = "/images/elements/" + name + ".png";
+
+	this.maximum = function()
+	{
+		return this.level.maximum;
+	};
+
+	this.changeMaximum = function(i)
+	{
+		this.level.changeMaximum(i);
+		$(document).trigger("pet:element:" + this.name + ":change");
+		$(document).trigger("pet:element:change");
+	};
+
+	this.setMaximum = function(i)
+	{
+		this.level.setMaximum(i);
+		$(document).trigger("pet:element:" + this.name + ":change");
+		$(document).trigger("pet:element:change");
+	};
+
+	this.current = function()
+	{
+		return this.level.current;
+	};
+
+	this.changeCurrent = function(i)
+	{
+		this.level.changeCurrent(i);
+		$(document).trigger("pet:element:" + this.name + ":change");
+		$(document).trigger("pet:element:change");
+	};
+
+	this.setCurrent = function(i)
+	{
+		this.level.setCurrent(i);
+		$(document).trigger("pet:element:" + this.name + ":change");
+		$(document).trigger("pet:element:change");
+	};
 };
 
 function CreateRandomiseElements(points)

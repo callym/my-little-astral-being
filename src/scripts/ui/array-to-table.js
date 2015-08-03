@@ -1,10 +1,11 @@
 /*
 	element should output an array of arrays
 	[true *** false if there is no header ***
-	[[COLUMN 1 HEADER 	... 	COLUMN N HEADER],
-	[COLUMN 1 DATA 1	...		COLUMN N DATA 1],
+	[class1, class2, ... class n]
+	[[COLUMN 1 HEADER, COLUMN 2 HEADER, 	... 	COLUMN N HEADER],
+	[COLUMN 1 DATA 1, COLUMN 2 DATA 1,	...		COLUMN N DATA 1],
 	...
-	[COLUMN 1 DATA N 	...		COLUMN N DATA N]]
+	[COLUMN 1 DATA N, COLUMN 2 DATA N, 	...		COLUMN N DATA N]]
 	]
 
 	<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
@@ -17,50 +18,49 @@ if (typeof updateLists == "undefined")
 updateLists.tables = [];
 updateLists.tablesVariable = [];
 
-function updateTable()
+function updateTable(curUpdate, i)
 {
-	for (var i = 0; i < updateLists.tables.length; i++)
-	{
-		var curUpdate = updateLists.tables[i];
-		var value = eval(curUpdate.dataset.arraytotable);
-		if (EqualArrays(updateLists.tablesVariable[i], value))
-		{
-			continue;
-		}
+	var value = GetFunction(curUpdate.dataset.arraytotable);
 
-		updateLists.tablesVariable[i] = value;
-		curUpdate.innerHTML = "<tbody></tbody>";
-		tableBody = curUpdate.getElementsByTagName("tbody")[0];
-		var hasHeader = value[0];
-		var classData = value[1];
-		var data = value[2];
-		for (var j = 0; j < data.length; j++)
+	if (EqualArrays(updateLists.tablesVariable[i], value))
+	{
+		return;
+	}
+
+	updateLists.tablesVariable[i] = value;
+	curUpdate.innerHTML = "<tbody></tbody>";
+	tableBody = curUpdate.getElementsByTagName("tbody")[0];
+	var hasHeader = value[0];
+	var classData = value[1];
+	var data = value[2];
+	for (var j = 0; j < data.length; j++)
+	{
+		var row = null;
+		if (j == 0 && hasHeader)
 		{
-			var row = null;
-			if (j == 0 && hasHeader)
+			head = curUpdate.createTHead();
+			row = head.insertRow(0);
+		}
+		else
+		{
+			row = tableBody.insertRow(-1);
+		}
+		for (var k = 0; k < data[j].length; k++)
+		{
+			var cell = row.insertCell(k);
+			if (classData[k] != "")
 			{
-				head = curUpdate.createTHead();
-				row = head.insertRow(0);
+				cell.classList.add(classData[k]);
 			}
-			else
-			{
-				row = tableBody.insertRow(-1);
-			}
-			for (var k = 0; k < data[j].length; k++)
-			{
-				var cell = row.insertCell(k);
-				if (classData[k] != "")
-				{
-					cell.classList.add(classData[k]);
-				}
-				cell.innerHTML = data[j][k];
-			}
+			cell.innerHTML = data[j][k];
 		}
 	}
+
+	$(document).trigger("ui:table:change");
 };
 
 runOnDOMChange(function()
 {
 	updateLists.tables = document.querySelectorAll("[data-arraytotable]");
-	setIntervals([updateTable, 10]);
+	registerEvent(updateLists.tables, updateTable);
 });

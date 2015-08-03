@@ -12,7 +12,6 @@ $(document).ready(function()
 		if ($.inArray(arr[0], setInvervalsArray) == -1);
 		{
 			setInvervalsArray.push(arr);
-			//setInterval(arr[0], arr[1]);
 		}
 	}
 	window.runSetIntervals = function()
@@ -22,7 +21,7 @@ $(document).ready(function()
 			setInvervalsArray[i][0]();
 		}
 	};
-	setInterval(runSetIntervals, 500);
+	setInterval(runSetIntervals, 1000);
 
 	window.runSetIntervalsLong = function()
 	{
@@ -42,19 +41,50 @@ $(document).ready(function()
 		}
 	}
 
-	observer = new window.MutationObserver(function(mutations, observer)
+	registeredEvents = [];
+	function registerEvent(arr, f)
 	{
-		for (var i = 0; i < runOnDOMChangeArray.length; i++)
+		for (var i = 0; i < arr.length; i++)
 		{
-			//runOnDOMChangeArray[i]();
-		}
-	});
+			var curUpdate = arr[i];
+			var cID = GetXPath(curUpdate);
+			var e = null;
 
-	observer.observe(document,
+			f(curUpdate, i);
+
+			if (typeof curUpdate.dataset.event != "undefined")
+			{
+				e = curUpdate.dataset.event;
+
+				var saveArray = [cID, e];
+
+				var equal = false;
+				for (var j = 0; j < registeredEvents.length; j++)
+				{
+					if (cID == registeredEvents[j][0] && e == registeredEvents[j][1])
+					{
+						equal = true;
+						break;
+					}
+				}
+				if (equal)
+				{
+					continue;
+				}
+
+				registeredEvents.push(saveArray);
+
+				runEvent(f, e, curUpdate, i);
+			}
+		}
+	};
+	function runEvent(func, ev, el, i)
 	{
-		subtree: true,
-		attributes: true
-	});
+		$(document).on(ev, function()
+		{
+			func(el, i);
+		});
+	};
 
 	//=require ui/**/*.js
 
