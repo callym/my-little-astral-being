@@ -1,9 +1,28 @@
 $main-font: "Ubuntu Mono";
 $background-colour: black;
 $main-colour: white;
-$compliment-colour: green;
+$compliment-colour: lime;
 
 $ui-main-colour: black;
 $ui-compliment-colour: $compliment-colour;
 $ui-background-colour: white;
 $ui-background-compliment-colour: $ui-compliment-colour;
+
+$air:		#C8C0E0;
+$earth:		#B6D16E;
+$fire:		#EF7D4E;
+$spirit:	#EC6A94;
+$water:		#82C9C5;
+$elements:
+(	"air":		$air,
+	"earth": 	$earth,
+	"fire":		$fire,
+	"spirit": 	$spirit,
+	"water": 	$water);
+
+@each $name, $colour in $elements
+{
+	.#{$name} { color: $colour; }
+	.#{$name}-lighter { color: lighten($colour, 15%); }
+	.#{$name}-darker { color: darken($colour, 15%); }
+}

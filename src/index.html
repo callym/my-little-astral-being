@@ -59,13 +59,49 @@
 					text: "OK",
 					click: function()
 					{
-						// hack to make sure small layout things work
-						//window.dispatchEvent(new Event("resize"));
 						$(this).dialog( "close" );
 					}
 				}],
 				hide: { effect: "fade", duration: 500 }
 			});
+
+			for (var i = 0; i < document.styleSheets.length; i++)
+			{
+				ss = document.styleSheets[i];
+				var tags = ["color", "border-top", "background", "background-color"];
+				var petColour = ElementColours[pet.soul.highestElement.name].html;
+
+				if (i == 0)
+				{
+					console.log("LOOPING 1");
+				}
+
+				for (var j = 0; j < ss.cssRules.length; j++)
+				{
+					rules = ss.cssRules[j];
+					if (j == 0)
+					{
+						console.log("LOOPING 2");
+					}
+					if (typeof rules == "undefined")
+					{
+						continue;
+					}
+					if (typeof rules.style == "undefined")
+					{
+						continue;
+					}
+					if (typeof rules.style.cssText != "undefined")
+					{
+						if (rules.style.cssText.indexOf("lime") > -1)
+						{
+							rules.style.cssText = rules.style.cssText.replace("lime", petColour);
+							console.log(rules);
+							console.log(i + " " + j);
+						}
+					}
+				}
+			}
 		});
 		</script>
 	</body>

@@ -1,10 +1,10 @@
 function Elements()
 {
-	this.Air 	= new Element("Air");
-	this.Earth 	= new Element("Earth");
-	this.Fire 	= new Element("Fire");
-	this.Water 	= new Element("Water");
-	this.Spirit = new Element("Spirit");
+	this.Air 	= new Element("air");
+	this.Earth 	= new Element("earth");
+	this.Fire 	= new Element("fire");
+	this.Water 	= new Element("water");
+	this.Spirit = new Element("spirit");
 };
 
 Elements.prototype.toArray = function()
@@ -14,14 +14,20 @@ Elements.prototype.toArray = function()
 
 Elements.prototype.toTableArray = function()
 {
-	var t = [["Element", "Current", "Maximum"]];
-	var arr = this.toArray()
+	var t = [];
+	var arr = this.toArray();
 	for (var i = 0; i < arr.length; i++)
 	{
-		t.push([arr[i].name, arr[i].level.current, arr[i].level.maximum]);
+		var img = "<img src='" + arr[i].sprite + "' height='32' width='32'>";
+		var progress = 	"<progress class='" + arr[i].name +
+						"' max='" + arr[i].level.maximum +
+						"' value='" + arr[i].level.current + "'></progress>"
+		t.push([img, progress, arr[i].level.maximum]);
 	}
 
-	return t;
+	var classes = ["shrink", "", "shrink"];
+
+	return [false, classes, t];
 };
 
 Elements.prototype.toListArray = function()
@@ -99,6 +105,8 @@ function Element(name, level)
 
 	level = level || 0;
 	this.level = new SettableInt(level);
+
+	this.sprite = "/images/elements/" + name + ".png";
 };
 
 function CreateRandomiseElements(points)

@@ -1,8 +1,8 @@
-function changePetSprite(spriteName)
+function changePetSprite(spriteName, spriteNormal)
 {
 	PIXI.loader
 	.add(spriteName, "/images/" + spriteName + ".png")
-	.add(spriteName + "_n", "/images/" + spriteName + "_n.png")
+	.add(spriteNormal, "/images/" + spriteNormal + ".png")
 	.load(function(loader, resources)
 	{
 		pet.sprite = new PIXI.Sprite();
@@ -11,7 +11,7 @@ function changePetSprite(spriteName)
 		container.addChild(pet.sprite);
 
 		pet.sprite.textureName = spriteName;
-		pet.sprite.normalTexture = resources[spriteName + "_n"].texture;
+		pet.sprite.normalTexture = resources[spriteNormal].texture;
 		pet.sprite.pivot.x = pet.sprite.width / 2;
 		pet.sprite.pivot.y = pet.sprite.height/ 2;
 		pet.sprite.position = centerPoint;

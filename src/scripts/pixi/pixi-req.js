@@ -10,7 +10,7 @@ $(function()
 
 	var canvas = document.querySelector("#petcanvas");
 	var appWidth 	= 1024;
-	var appHeight 	= 512;
+	var appHeight 	= 1024;
 	canvas.width = winWidth;
 	canvas.height = winHeight;
 	canvas.style.position = "absolute";
@@ -19,9 +19,7 @@ $(function()
 		appWidth,
 		appHeight,
 		{
-			view: canvas,
-			//transparent: true,
-			//antialias: true
+			view: canvas
 		});
 
 	containerContainer = new PIXI.Container();
@@ -31,26 +29,34 @@ $(function()
 	centerPoint = new PIXI.Point(appWidth / 2, appHeight / 2);
 
 	var light = new PIXI.lights.PointLight(0xffffff, 1);
+
 	var dirLight = new PIXI.lights.DirectionalLight(0xffffff, 0.5, centerPoint);
-	dirLight.position.x = 250;
+	dirLight.position.x = centerPoint.x;
 	dirLight.position.y = 0;
+
+	var dirLight2 = new PIXI.lights.DirectionalLight(0xffffff, 0.5, centerPoint);
+	dirLight2.position.x = 0;
+	dirLight2.position.y = centerPoint.y / 2;
+
+	var dirLight3 = new PIXI.lights.DirectionalLight(0xffffff, 0.5, centerPoint);
+	dirLight3.position.x = centerPoint.x * 2;
+	dirLight3.position.y = centerPoint.y / 2;
+
+	var ambientLight = new PIXI.lights.AmbientLight(0xffffff, 0.6);
+	ambientLight.position.x = centerPoint.x;
+	ambientLight.position.y = 0;
 
 	container.addChild(light);
 	container.addChild(dirLight);
-	container.addChild(new PIXI.lights.AmbientLight(0xffffff, 0.4));
+	container.addChild(dirLight2);
+	container.addChild(dirLight3);
+	container.addChild(ambientLight);
 
 	renderer.view.addEventListener('mousemove', function (e)
 	{
 		var rect = e.target.getBoundingClientRect();
 		light.position.x = e.clientX - rect.left;
 		light.position.y = e.clientY - rect.top;
-	});
-
-	renderer.view.addEventListener('click', function (e)
-	{
-		//var s = (pet.sprite.textureName == "diamond") ? "egg" : "diamond";
-		//changePetSprite(s);
-		$("#menu").children(".menu-button").click();
 	});
 
 	animate();
@@ -95,6 +101,4 @@ $(function()
 	// Hook re-size event
 	window.addEventListener('resize', resize, false);
 	resize();
-
-	changePetSprite("egg");
 });

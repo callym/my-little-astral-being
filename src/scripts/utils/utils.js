@@ -91,3 +91,19 @@ $.fn.getRealDimensions = function (outer) {
     $clone.remove();
     return result;
 }
+
+function ElementColour(hex)
+{
+    var str = "" + hex;
+    this.html = "#" + str.split("x")[1];
+    this.hex = hex;
+}
+
+ElementColours =
+{
+    air :       new ElementColour("0xC8C0E0"),
+    earth :     new ElementColour("0xB6D16E"),
+    fire :      new ElementColour("0xEF7D4E"),
+    spirit :    new ElementColour("0xEC6A94"),
+    water :     new ElementColour("0x82C9C5")
+};

@@ -1,10 +1,10 @@
 /*
 	element should output an array of arrays
-	[
-	[COLUMN 1 HEADER 	... 	COLUMN N HEADER],
+	[true *** false if there is no header ***
+	[[COLUMN 1 HEADER 	... 	COLUMN N HEADER],
 	[COLUMN 1 DATA 1	...		COLUMN N DATA 1],
 	...
-	[COLUMN 1 DATA N 	...		COLUMN N DATA N]
+	[COLUMN 1 DATA N 	...		COLUMN N DATA N]]
 	]
 
 	<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
@@ -31,10 +31,13 @@ function updateTable()
 		updateLists.tablesVariable[i] = value;
 		curUpdate.innerHTML = "<tbody></tbody>";
 		tableBody = curUpdate.getElementsByTagName("tbody")[0];
-		for (var i = 0; i < value.length; i++)
+		var hasHeader = value[0];
+		var classData = value[1];
+		var data = value[2];
+		for (var j = 0; j < data.length; j++)
 		{
 			var row = null;
-			if (i == 0)
+			if (j == 0 && hasHeader)
 			{
 				head = curUpdate.createTHead();
 				row = head.insertRow(0);
@@ -43,10 +46,14 @@ function updateTable()
 			{
 				row = tableBody.insertRow(-1);
 			}
-			for (var j = 0; j < value[i].length; j++)
+			for (var k = 0; k < data[j].length; k++)
 			{
-				var cell = row.insertCell(j);
-				cell.innerHTML = value[i][j];
+				var cell = row.insertCell(k);
+				if (classData[k] != "")
+				{
+					cell.classList.add(classData[k]);
+				}
+				cell.innerHTML = data[j][k];
 			}
 		}
 	}
