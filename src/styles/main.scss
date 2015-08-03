@@ -114,6 +114,12 @@ table
 	font-family: $main-font;
 }
 
+.ui-dialog .ui-dialog-title
+{
+	white-space: normal;
+	text-align: right;
+}
+
 .no-close .ui-dialog-titlebar-close
 {
   display: none;
