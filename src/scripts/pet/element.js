@@ -5,6 +5,8 @@ function Elements()
 	this.Fire 	= new Element("fire");
 	this.Water 	= new Element("water");
 	this.Spirit = new Element("spirit");
+
+	this.previousArray = null;
 };
 
 Elements.prototype.toArray = function()
@@ -18,9 +20,10 @@ Elements.prototype.toTableArray = function()
 	var arr = this.toArray();
 	for (var i = 0; i < arr.length; i++)
 	{
+		var max = (arr[i].level.maximum == 0) ? 0.1 : arr[i].level.maximum;
 		var img = "<img src='" + arr[i].sprite + "' height='32' width='32'>";
 		var progress = 	"<progress class='" + arr[i].name +
-						"' max='" + arr[i].level.maximum +
+						"' max='" + max +
 						"' value='" + arr[i].level.current + "'></progress>"
 		t.push([img, progress, arr[i].level.maximum]);
 	}

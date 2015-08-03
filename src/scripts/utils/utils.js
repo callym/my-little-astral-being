@@ -28,7 +28,7 @@ function Shuffle(array) {
     }
 
     return array;
-}
+};
 
 function EqualArrays(arr1, arr2)
 {
@@ -51,6 +51,10 @@ function EqualArrays(arr1, arr2)
     {
         if (typeof arr1[i] == "undefined" || typeof arr2[i] == "undefined")
         {
+            if (typeof arr1[i] == "undefined" && typeof arr2[i] == "undefined")
+            {
+                continue;
+            }
             return false;
         }
 
@@ -65,13 +69,13 @@ function EqualArrays(arr1, arr2)
                 }
             }
         }
-        else if (arr1[i] != arr2[i])
+        if (arr1[i] != arr2[i])
         {
             return false;
         }
     }
     return true;
-}
+};
 
 $.fn.getRealDimensions = function (outer) {
     var $this = $(this);
@@ -90,14 +94,14 @@ $.fn.getRealDimensions = function (outer) {
     };
     $clone.remove();
     return result;
-}
+};
 
 function ElementColour(hex)
 {
     var str = "" + hex;
     this.html = "#" + str.split("x")[1];
     this.hex = hex;
-}
+};
 
 ElementColours =
 {

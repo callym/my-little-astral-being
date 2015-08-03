@@ -22,7 +22,7 @@ $(document).ready(function()
 			setInvervalsArray[i][0]();
 		}
 	};
-	setInterval(runSetIntervals, 50);
+	setInterval(runSetIntervals, 500);
 
 	window.runSetIntervalsLong = function()
 	{
@@ -31,7 +31,7 @@ $(document).ready(function()
 			runOnDOMChangeArray[i]();
 		}
 	};
-	setInterval(runSetIntervalsLong, 500);
+	setInterval(runSetIntervalsLong, 1000);
 
 	runOnDOMChange = function(func)
 	{
