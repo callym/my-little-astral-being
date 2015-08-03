@@ -14,7 +14,8 @@ function changePetSprite(spriteName, spriteNormal)
 		pet.sprite.normalTexture = resources[spriteNormal].texture;
 		pet.sprite.pivot.x = pet.sprite.width / 2;
 		pet.sprite.pivot.y = pet.sprite.height/ 2;
-		pet.sprite.position = centerPoint;
+		pet.sprite.position.x = centerPoint.x;
+		pet.sprite.position.y = (pet.sprite.height * 3) / 4;
 
 		PIXI.loader.reset();
 	});
