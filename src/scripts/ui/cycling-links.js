@@ -32,7 +32,7 @@ function nextCyclingLink(thisLink)
 	var v = cyclingLinkObject.variable;
 	var cycleType = cyclingLinkObject.type.toLowerCase();
 	var options = cyclingLinkObject.options;
-	var current = thisLink.innerHTML;
+	var current = thisLink.textContent;
 	var currentIndex = 0;
 
 	if (options[0].constructor === Array)
@@ -57,12 +57,12 @@ function nextCyclingLink(thisLink)
 
 	if (cycleType === "desc")
 	{
-		thisLink.innerHTML = options[nextIndex];
+		thisLink.textContent = options[nextIndex];
 		eval(v + " = '" + options[nextIndex] + "'");
 	}
 	else if (cycleType.indexOf("maths") > -1)
 	{
-		thisLink.innerHTML = options[nextIndex][0];
+		thisLink.textContent = options[nextIndex][0];
 		var op = " = ";
 		if 		(cycleType === "mathsadd") 		{ op = "ADD"; }
 		else if (cycleType === "mathssubtract") { op = "SUBTRACT"; }
@@ -76,8 +76,14 @@ function nextCyclingLink(thisLink)
 	}
     else if (cycleType.indexOf("set") > -1)
     {
-    	thisLink.innerHTML = options[nextIndex][0];
+    	thisLink.textContent = options[nextIndex][0];
     	eval(v + " = " + options[nextIndex][1]);
         console.log(options[nextIndex][1]);
     }
+    if (thisLink.innerHTML == thisLink.textContent)
+	{
+		var cycleLinkIcon = document.createElement("i");
+		cycleLinkIcon.classList.add("cycleLinkIcon", "fa", "fa-circle-o-notch", "fa-spin");
+		$(thisLink).prepend(cycleLinkIcon);
+	}
 };

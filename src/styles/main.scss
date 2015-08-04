@@ -2,8 +2,6 @@
 @import "jquery-ui.structure", "jquery-ui.theme";
 @import "progress-bars";
 
-@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700,700italic);
-
 body
 {
 	font-family: $main-font;
@@ -15,6 +13,29 @@ body
 *:focus
 {
 	outline: none;
+}
+
+.fa
+{
+	margin-right: 0.5em;
+}
+
+.fa-spin-hover:hover
+{
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+.rightText
+{
+	text-align: right;
+}
+
+.centerText
+{
+	text-align: center;
 }
 
 table
@@ -104,6 +125,12 @@ table
 	}
 }
 
+#daybutton
+{
+	margin: 0 auto;
+	font-size: 3ex;
+}
+
 #petcanvas
 {
 	z-index: -10;
@@ -127,12 +154,17 @@ table
 
 [data-setvariable]
 {
-	color: red;
+	color: $compliment-colour-dark;
 }
 
-[contenteditable="true"]
+[data-contenteditable]
 {
-	color: blue;
+	color: $compliment-colour-dark;
+}
+
+.cycling-link
+{
+	color: $compliment-colour-dark;
 }
 
 .hide

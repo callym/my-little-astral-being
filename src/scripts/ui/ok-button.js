@@ -53,7 +53,7 @@ function HTMLtoVariable(t)
 
 	if (vType === "desc")
 	{
-		var text = e.innerText;
+		var text = e.textContent;
 		var exp = v + " = '" + text + "'";
 		eval(exp);
 	}
@@ -66,11 +66,11 @@ function HTMLtoVariable(t)
 		else if (vType === "mathsdivide")	{ op = "DIVIDE"; }
 		else if (vType === "mathsmultiply") { op = "MULTIPLY"; }
 
-		eval(v + Maths.Operators[op] + e.innerText);
+		eval(v + Maths.Operators[op] + e.textContent);
 	}
     else if (vType.indexOf("set") > -1)
     {
-    	eval(v + " = " + e.innerText);
+    	eval(v + " = " + e.textContent);
     }
 
     if ($(e).attr("contenteditable") == "true")

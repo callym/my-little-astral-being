@@ -50,7 +50,7 @@ function updateTable(curUpdate, i)
 			var cell = row.insertCell(k);
 			if (classData[k] != "")
 			{
-				cell.classList.add(classData[k]);
+				cell.className += classData[k];
 			}
 			cell.innerHTML = data[j][k];
 		}

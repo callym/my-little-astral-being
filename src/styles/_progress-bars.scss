@@ -9,9 +9,36 @@ progress
 	height: 2px;
 	vertical-align: 0.2em;
 	position: relative;
+	float: right;
 }
 
-@each $name, $colour in $elements
+.progress-wrapper
+{
+	height: 18px;
+	padding-top: 20px;
+	overflow: auto;
+}
+
+.progress-label
+{
+	float: left;
+	padding-top: 11px;
+	padding-right: 2.5%;
+}
+
+.progressbar-overlay
+{
+	text-align: right;
+	bottom: 1.2ex;
+	position: absolute;
+}
+
+$progressbar-colours:
+	"silver"	#AAAAAA,;
+
+$progressbar-colours: join($progressbar-colours, $elements);
+
+@each $name, $colour in $progressbar-colours
 {
 	$progress-background: rgba($colour, 0.25);
 	$progress-foreground: $colour;
@@ -19,4 +46,11 @@ progress
 	progress.#{$name}::-webkit-progress-bar { background: $progress-background; }
 	progress.#{$name}::-webkit-progress-value { background: $progress-foreground; }
 	progress.#{$name}::-moz-progress-bar { background: $progress-foreground; }
+}
+
+@each $name, $colour in $progressbar-colours
+{
+	.#{$name} { color: $colour; }
+	.#{$name}-lighter { color: lighten($colour, 15%); }
+	.#{$name}-darker { color: darken($colour, 15%); }
 }

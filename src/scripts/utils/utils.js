@@ -151,4 +151,12 @@ function GetXPath(element)
         xpath = '/' + element.tagName.toLowerCase() + id + xpath;
     }
     return xpath;
-}
+};
+
+function TriggerEvents(events)
+{
+    for (var i = 0; i < events.length; i++)
+    {
+        $(document).trigger(events[i]);
+    }
+};

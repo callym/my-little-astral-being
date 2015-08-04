@@ -25,6 +25,11 @@ function Pet(petName)
 		}
 	}
 	this.soul.highestElement = highest;
+
+	this.runDay = function()
+	{
+		this.body.dust.changeCurrent(RandomInt(15, 5));
+	};
 };
 
 $(function()

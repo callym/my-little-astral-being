@@ -21,12 +21,13 @@ function Elements()
 			var max = (arr[i].level.maximum == 0) ? 0.1 : arr[i].level.maximum;
 			var img = "<img src='" + arr[i].sprite + "' height='32' width='32'>";
 			var progress = 	"<progress data-event='pet:element:" + arr[i].name + ":change' class='" + arr[i].name +
-							"' data-progress='pet.soul.elements." + arr[i].name + ".level'></progress>";
+							"' data-progress='pet.soul.elements." + arr[i].name + ".level'" +
+							" data-max='10'></progress>";
 			var max = "<span data-showvariable=" + arr[i].level.maximum + "></span>"
 			t.push([img, progress, arr[i].level.maximum]);
 		}
 
-		var classes = ["shrink", "", "shrink"];
+		var classes = ["shrink", "", "shrink rightText"];
 
 		return [false, classes, t];
 	};
@@ -92,7 +93,7 @@ function Element(name, level)
 	this.name = name;
 
 	level = level || 0;
-	this.level = new SettableInt(level);
+	this.level = new SettableInt(level, 0, ["pet:element:change", "pet:element:" + name + ":change"]);
 
 	this.sprite = "/images/elements/" + name + ".png";
 
@@ -104,15 +105,11 @@ function Element(name, level)
 	this.changeMaximum = function(i)
 	{
 		this.level.changeMaximum(i);
-		$(document).trigger("pet:element:" + this.name + ":change");
-		$(document).trigger("pet:element:change");
 	};
 
 	this.setMaximum = function(i)
 	{
 		this.level.setMaximum(i);
-		$(document).trigger("pet:element:" + this.name + ":change");
-		$(document).trigger("pet:element:change");
 	};
 
 	this.current = function()
@@ -123,15 +120,11 @@ function Element(name, level)
 	this.changeCurrent = function(i)
 	{
 		this.level.changeCurrent(i);
-		$(document).trigger("pet:element:" + this.name + ":change");
-		$(document).trigger("pet:element:change");
 	};
 
 	this.setCurrent = function(i)
 	{
 		this.level.setCurrent(i);
-		$(document).trigger("pet:element:" + this.name + ":change");
-		$(document).trigger("pet:element:change");
 	};
 };
 

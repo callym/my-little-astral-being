@@ -33,7 +33,7 @@
 			<br/><br/>
 			what do you want to call it?
 			<br/><br/>
-			<span id="pet-name" contenteditable="true">Fluffy</span>.
+			<span id="pet-name" data-contenteditable="true" data-initial="Fluffy"></span>.
 		</div>
 
 		<canvas id="petcanvas"></canvas>
@@ -45,7 +45,15 @@
 				<li><a href="#pet-element-stats">elements</a></li>
 			</ul>
 			<div id="pet-data">
-				<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
+				<div>
+					<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
+				</div>
+				<div>
+					<div class="progress-label">dusty:</div>
+					<div class="progress-wrapper">
+						<progress class="silver" data-event='pet:body:dust:change' data-progress='pet.body.dust' data-max='100'></progress>
+					</div>
+				</div>
 			</div>
 			<div id="pet-element-stats">
 				<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
@@ -53,10 +61,20 @@
 		</div>
 		</div>
 
+		<div class="top centerText">
+			<button id="daybutton">go to sleep</button>
+		</div>
+
 		<script type="text/javascript">
 		$(function()
 		{
 			$("#menu").tabs();
+
+			$("#daybutton").button().click(function(e)
+			{
+				e.preventDefault();
+				pet.runDay();
+			});
 
 			$.ui.dialog.prototype._title = function(title)
 			{
@@ -71,6 +89,8 @@
 				modal: true,
 				resizable: false,
 				draggable: false,
+				minWidth: 350,
+				width: $(window).width() * 0.4,
 				beforeClose: function()
 				{
 					$('.ui-widget-overlay:first')
@@ -104,6 +124,7 @@
 				ss = document.styleSheets[i];
 				var tags = ["color", "border-top", "background", "background-color"];
 				var petColour = ElementColours[pet.soul.highestElement.name].html;
+				var petColourDark = tinycolor(petColour).darken(20).toHexString();
 
 				for (var j = 0; j < ss.cssRules.length; j++)
 				{
@@ -121,6 +142,10 @@
 						if (rules.style.cssText.indexOf("lime") > -1)
 						{
 							rules.style.cssText = rules.style.cssText.replace("lime", petColour);
+						}
+						if (rules.style.cssText.indexOf("blue") > -1)
+						{
+							rules.style.cssText = rules.style.cssText.replace("blue", petColourDark);
 						}
 					}
 				}

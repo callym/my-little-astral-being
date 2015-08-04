@@ -7,12 +7,20 @@ if (typeof updateLists == "undefined")
 	updateLists = {};
 }
 updateLists.progress = [];
+updateLists.progressVariables = [];
 
 function updateProgress(cur, i)
 {
 	var si = GetFunction(cur.dataset.progress, false);
+	var maxMax = cur.dataset.max;
 	var value = cur.value = si.current;
 	var max = cur.max = si.maximum;
+
+	if (EqualArrays(updateLists.progressVariables[i], [value, max]))
+	{
+		return;
+	}
+	updateLists.progressVariables[i] = [value, max];
 
 	if (max < 1)
 	{
@@ -23,24 +31,49 @@ function updateProgress(cur, i)
 		$(cur).css("display", "");
 	}
 
-	$(cur).css("width", ((max/10) * 100) + "%");
+	$(cur).css("width", ((max/maxMax) * 100) + "%");
 
-	if (value == 0 || value == 10)
+	var overlayElement = $(cur.parentElement).children(".progressbar-overlay");
+	var e;
+	var $e;
+
+	if (overlayElement.length <= 0)
 	{
-		return;
+		e = document.createElement("div");
+		$e = $(e);
+	}
+	else
+	{
+		e = overlayElement[0];
+		$e = overlayElement;
 	}
 
-	var e = document.createElement("div");
-	var $e = $(e);
-	$e.css("text-align", "right");
-	$e.css("width", "calc(" + ((value/10) * 100) + "% + 0.5ex)");
-	$e.css("bottom", "1.2ex");
-	$e.css("position", "absolute");
-	$e.addClass($(cur).attr("class") + "-lighter");
-	$e.addClass("outlineText");
-	e.innerHTML = value;
+	if (value == 0 || value == maxMax)
+	{
+		$e.css("display", "none");
+		return;
+	}
+	else
+	{
+		$e.css("display", "");
+	}
+
+	$e.fadeOut(400, function()
+	{
+		$e.css("width", "calc(" + ((value/maxMax) * 100) + "% + 0.5ex)");
+		$e.addClass($(cur).attr("class") + "-lighter");
+		$e.addClass("outlineText");
+		$e.addClass("progressbar-overlay");
+		e.innerHTML = value;
+		$e.fadeIn(400);
+	});
+
 	$(cur.parentElement).css("position", "relative");
-	cur.parentElement.appendChild(e);
+
+	if (overlayElement.length <= 0)
+	{
+		cur.parentElement.appendChild(e);
+	}
 };
 
 runOnDOMChange(function()

@@ -1,8 +1,12 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700,700italic);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+
 $main-font: "Ubuntu Mono";
 $background-colour: black;
 $main-colour: white;
 // this is changed in the JS to be the pet's element colour (defined below)
 $compliment-colour: lime;
+$compliment-colour-dark: blue;
 
 $ui-main-colour: black;
 $ui-compliment-colour: $compliment-colour;
@@ -15,15 +19,21 @@ $fire:		#EF7D4E;
 $spirit:	#EC6A94;
 $water:		#82C9C5;
 $elements:
-(	"air":		$air,
-	"earth": 	$earth,
-	"fire":		$fire,
-	"spirit": 	$spirit,
-	"water": 	$water);
+	"air"		$air,
+	"earth" 	$earth,
+	"fire"		$fire,
+	"spirit" 	$spirit,
+	"water" 	$water;
 
-@each $name, $colour in $elements
+@mixin icon($name)
 {
-	.#{$name} { color: $colour; }
-	.#{$name}-lighter { color: lighten($colour, 15%); }
-	.#{$name}-darker { color: darken($colour, 15%); }
+	$withslash: "\"\\#{$name}\"";
+	&::before
+	{
+		margin-right: .5em;
+		vertical-align: middle;
+		font-family: FontAwesome;
+		font-size: inherit;
+		content: "#{'\"\\' + $name + "\""}";
+	}
 }

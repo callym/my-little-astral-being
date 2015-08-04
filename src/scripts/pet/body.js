@@ -6,7 +6,8 @@ function Body(pet)
 
 	this.species = this.NewSpecies();
 
-	this.energy = new SettableInt(10);
+	this.dust = new SettableInt(100, 0, "pet:body:dust:changed");
+	this.dust.setCurrent(0);
 };
 
 Body.prototype.SubSpecies =
