@@ -76,7 +76,12 @@
 		<script type="text/javascript">
 		$(function()
 		{
-			$("#menu").tabs();
+			var tabEffect = { effect: "fade", duration: 500, easing: "linear" };
+			$("#menu").tabs(
+			{
+				hide: tabEffect,
+				show: tabEffect,
+			});
 
 			$("#polish").button().click(function(e)
 			{
