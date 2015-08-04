@@ -8,23 +8,18 @@ function Pet(petName)
 
 	this.soul = new Soul(this);
 	this.body = new Body(this);
+	this.soul.init();
 
-	this.soul.elements.setMaximumFromArray(this.body.species.elements);
-	var arr = this.soul.elements.toArray();
-
-	var highest = null;
-	for (var i = 0; i < arr.length; i++)
+	var _death = "";
+	this.death = function(newString)
 	{
-		if (highest == null)
+		newString = newString || false;
+		if (newString != false)
 		{
-			highest = arr[i];
+			_death = newString;
 		}
-		else if (arr[i].level.maximum > highest.level.maximum)
-		{
-			highest = arr[i];
-		}
-	}
-	this.soul.highestElement = highest;
+		return _death;
+	};
 
 	this.runDay = function()
 	{

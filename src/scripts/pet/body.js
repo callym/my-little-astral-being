@@ -12,10 +12,13 @@ function Body(pet)
 	{
 		this.dust.changeCurrent(-RandomInt(15, 5));
 	};
-	/*$(document).on(ev, function()
+	$(document).on("pet:body:dust:change", function()
 	{
-
-	});*/
+		if (pet.body.dust.current == 100)
+		{
+			TriggerEvents("pet:death");
+		}
+	});
 };
 
 Body.prototype.SubSpecies =

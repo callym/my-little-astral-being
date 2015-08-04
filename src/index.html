@@ -11,7 +11,6 @@
 		<script src="scripts/main.js"></script>
 	</head>
 	<body class="hide">
-		<div id="overlay"><div id="overlay-box"></div></div>
 		<div class="dialog" id="pet-name-dialog" title="a strange crystal falls from the sky...">
 			you pick it up and feel the vibrations from its energy field.
 			<br/><br/>
@@ -73,6 +72,10 @@
 			<button id="daybutton">go to sleep</button>
 		</div>
 
+		<div class="dialog" id="pet-death-dialog" title="oh no...">
+			<span data-showvariable="pet.death()"></span>
+		</div>
+
 		<script type="text/javascript">
 		$(function()
 		{
@@ -95,7 +98,20 @@
 				pet.runDay();
 			});
 
-			$("#pet-name-dialog").dialog();
+			$("#pet-name-dialog").dialog(
+			{
+				close: function()
+				{
+					pet.death("a heavy book falls onto " + pet.name + ", who shatters into a million tiny shards.");
+				}
+			});
+
+			$("#pet-death-dialog").dialog({ autoOpen: false });
+			$(document).on("pet:death", function()
+			{
+				console.log("DEAD!");
+				$("#pet-death-dialog").dialog("open");
+			});
 		});
 		</script>
 	</body>
