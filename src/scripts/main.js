@@ -23,14 +23,14 @@ $(document).ready(function()
 	};
 	setInterval(runSetIntervals, 1000);
 
-	window.runSetIntervalsLong = function()
+	/*window.runSetIntervalsLong = function()
 	{
 		for (var i = 0; i < runOnDOMChangeArray.length; i++)
 		{
 			runOnDOMChangeArray[i]();
 		}
 	};
-	setInterval(runSetIntervalsLong, 1000);
+	setInterval(runSetIntervalsLong, 1000);*/
 
 	runOnDOMChange = function(func)
 	{
@@ -87,6 +87,52 @@ $(document).ready(function()
 	};
 
 	//=require ui/**/*.js
+
+	var observer = new MutationObserver(function(mutations)
+	{
+		if (typeof mutations.removedNodes != "undefined")
+		{
+			console.log(mutations.removedNodes);
+			for (var property in updateLists)
+			{
+				if (property.constructor != Array)
+				{
+					continue;
+				}
+				if (updateLists.hasOwnProperty(property))
+				{
+					mutations.removedNodes.forEach(function(e)
+					{
+						var index = property.indexOf(e);
+						if (index > -1)
+						{
+							property[index] = null;
+						}
+					});
+				}
+			}
+
+			if (typeof mutations.addedNodes != "undefined")
+			{
+				console.log(mutations.addedNodes);
+				for (var i = 0; i < runOnDOMChangeArray.length; i++)
+				{
+					runOnDOMChangeArray[i]();
+				}
+			}
+		}
+	});
+
+	observer.observe(document.body,
+	{
+		childList: true,
+		subtree: true
+	});
+
+	for (var i = 0; i < runOnDOMChangeArray.length; i++)
+	{
+		runOnDOMChangeArray[i]();
+	}
 
 	$("body").fadeIn(1000, function()
 	{

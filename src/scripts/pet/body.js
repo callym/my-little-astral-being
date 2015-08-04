@@ -6,12 +6,16 @@ function Body(pet)
 
 	this.species = this.NewSpecies();
 
-	this.dust = new SettableInt(100, 0, "pet:body:dust:changed");
+	this.dust = new SettableInt(100, 0, "pet:body:dust:change");
 	this.dust.setCurrent(0);
 	this.polish = function()
 	{
 		this.dust.changeCurrent(-RandomInt(15, 5));
-	}
+	};
+	/*$(document).on(ev, function()
+	{
+
+	});*/
 };
 
 Body.prototype.SubSpecies =

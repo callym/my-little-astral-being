@@ -27,6 +27,9 @@ function updateTable(curUpdate, i)
 		return;
 	}
 
+	var parent = curUpdate.parentNode;
+	parent.removeChild(curUpdate);
+	curUpdate = document.createElement("table");
 	updateLists.tablesVariable[i] = value;
 	curUpdate.innerHTML = "<tbody></tbody>";
 	tableBody = curUpdate.getElementsByTagName("tbody")[0];
@@ -55,12 +58,14 @@ function updateTable(curUpdate, i)
 			cell.innerHTML = data[j][k];
 		}
 	}
+	parent.appendChild(curUpdate);
 
-	$(document).trigger("ui:table:change");
+	TriggerEvents("ui:table:change");
 };
 
 runOnDOMChange(function()
 {
+	/* runOnDOMChange needs to only run when the DOM changes... */
 	updateLists.tables = document.querySelectorAll("[data-arraytotable]");
 	registerEvent(updateLists.tables, updateTable);
 });

@@ -22,7 +22,7 @@ function updateElements()
 			continue;
 		}
 
-    	curUpdate.innerHTML = value;
+    	curUpdate.textContent = value;
     	updateLists.showVariables[i] = value;
 	}
 	for (var i = 0; i < updateLists.iftrue.length; i++)

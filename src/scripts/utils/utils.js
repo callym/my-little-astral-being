@@ -155,8 +155,16 @@ function GetXPath(element)
 
 function TriggerEvents(events)
 {
-    for (var i = 0; i < events.length; i++)
+    if (events.constructor == Array)
     {
-        $(document).trigger(events[i]);
+        for (var i = 0; i < events.length; i++)
+        {
+            $(document).trigger(events[i]);
+            console.log("triggered " + events[i]);
+        }
+    }
+    else
+    {
+        TriggerEvents([events]);
     }
 };

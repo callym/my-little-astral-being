@@ -15,7 +15,7 @@ updateLists.OK = [];
 
 runOnDOMChange(function()
 {
-	var newUpdateList = document.querySelectorAll("[data-setvariable]");
+	var newUpdateList = $("[data-setvariable]");
 
 	if (EqualArrays(newUpdateList, updateLists.OK))
 	{

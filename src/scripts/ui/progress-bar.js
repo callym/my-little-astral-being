@@ -14,13 +14,14 @@ function updateProgress(cur, i)
 	var si = GetFunction(cur.dataset.progress, false);
 	var maxMax = cur.dataset.max;
 	var value = cur.value = si.current;
-	var max = cur.max = si.maximum;
+	var max = (si.maximum == 0) ? 0.1 : si.maximum;
+	cur.max = si.maximum;
 
-	if (EqualArrays(updateLists.progressVariables[i], [value, max]))
+	if (EqualArrays(updateLists.progressVariables[i], [value, max, maxMax]))
 	{
 		return;
 	}
-	updateLists.progressVariables[i] = [value, max];
+	updateLists.progressVariables[i] = [value, max, maxMax];
 
 	if (max < 1)
 	{
