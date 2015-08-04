@@ -1,41 +1,39 @@
+@import "util";
 @import "variables";
-@import "jquery-ui.structure", "jquery-ui.theme";
-@import "progress-bars";
+@import "jquery/jquery-ui.structure", "jquery/jquery-ui.theme";
+@import "browser-positions", "ui-overrides", "progress-bars", "menu";
 
 body
 {
 	font-family: $main-font;
 	color: $main-colour;
 	background-color: $background-colour;
-	max-height: 90vh;
 }
 
-*:focus
+#daybutton
 {
-	outline: none;
+	margin: 0 auto;
+	font-size: 3ex;
 }
 
-.fa
+#petcanvas
 {
-	margin-right: 0.5em;
+	z-index: -10;
 }
 
-.fa-spin-hover:hover
+[data-setvariable]
 {
-  -webkit-animation: spin 2s infinite linear;
-  -moz-animation: spin 2s infinite linear;
-  -o-animation: spin 2s infinite linear;
-  animation: spin 2s infinite linear;
+	color: $compliment-colour-dark;
 }
 
-.rightText
+[data-contenteditable]
 {
-	text-align: right;
+	color: $compliment-colour-dark;
 }
 
-.centerText
+.cycling-link
 {
-	text-align: center;
+	color: $compliment-colour-dark;
 }
 
 table
@@ -56,140 +54,4 @@ table
 			padding-right: 0;
 		}
 	}
-}
-
-.outlineText
-{
-	text-shadow:	-1px -1px 0 black,
-					1px -1px 0 black,
-					-1px 1px 0 black,
-					1px 1px 0 black;
-}
-
-#menu {
-	margin: 0 auto;
-	width: 50%;
-	position: relative;
-	padding-bottom: 3em;
-
-	background: transparent;
-	border: none;
-
-	.ui-widget-header
-	{
-		border: none;
-	}
-
-	.ui-widget-content
-	{
-		color: $main-colour;
-		border-bottom: 1px solid #c0c0c0;
-		border-radius: 0px;
-	}
-
-	.ui-tabs-nav
-	{
-		position: absolute;
-		left: 0.25em;
-		right: 0.25em;
-		bottom: 0.25em;
-		padding: 0em 0.2em 0.2em;
-
-		text-align: center;
-
-		li
-		{
-			display: inline-block;
-			float: none;
-		}
-
-		.ui-state-default
-		{
-			background: transparent;
-			border: none;
-			a
-			{
-				color: $main-colour;
-			}
-		}
-		.ui-state-active
-		{
-			background: transparent;
-			border: none;
-			border-top: 1px solid $compliment-colour;
-			a
-			{
-				color: $compliment-colour;
-			}
-		}
-	}
-}
-
-#daybutton
-{
-	margin: 0 auto;
-	font-size: 3ex;
-}
-
-#petcanvas
-{
-	z-index: -10;
-}
-
-.ui-button-text
-{
-	font-family: $main-font;
-}
-
-.ui-dialog .ui-dialog-title
-{
-	white-space: normal;
-	text-align: right;
-}
-
-.no-close .ui-dialog-titlebar-close
-{
-  display: none;
-}
-
-[data-setvariable]
-{
-	color: $compliment-colour-dark;
-}
-
-[data-contenteditable]
-{
-	color: $compliment-colour-dark;
-}
-
-.cycling-link
-{
-	color: $compliment-colour-dark;
-}
-
-.hide
-{
-	display: none;
-}
-
-$browsercorner-position: fixed;
-$browsercorner-padding: 10px;
-.top { position: $browsercorner-position; top: $browsercorner-padding; width: 100%; }
-
-.bottom { position: $browsercorner-position; bottom: $browsercorner-padding; width: 100% }
-
-.topleft { position: $browsercorner-position; top: $browsercorner-padding; left:  $browsercorner-padding; }
-
-.bottomleft { position: $browsercorner-position; bottom: $browsercorner-padding; left:  $browsercorner-padding; }
-
-.topright { position: $browsercorner-position; top: $browsercorner-padding; right:  $browsercorner-padding; }
-
-.bottomright { position: $browsercorner-position; bottom: $browsercorner-padding; right:  $browsercorner-padding; }
-
-.center
-{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }

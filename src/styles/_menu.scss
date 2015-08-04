@@ -1,0 +1,45 @@
+#menu
+{
+	margin: 0 auto;
+	width: 50%;
+	padding-bottom: 3em;
+	background: transparent;
+
+	.ui-widget-content
+	{
+		color: $main-colour;
+	}
+
+	.ui-tabs-nav
+	{
+		position: fixed;
+		left: 0em;
+		right: 0em;
+		bottom: 0.5em;
+		text-align: center;
+
+		li
+		{
+			display: inline-block;
+			float: none;
+		}
+
+		.ui-state-default
+		{
+			background: transparent;
+			a
+			{
+				color: $main-colour;
+			}
+		}
+		.ui-state-active
+		{
+			background: transparent;
+			border-top: 1px solid $compliment-colour-dark;
+			a
+			{
+				color: $compliment-colour;
+			}
+		}
+	}
+}

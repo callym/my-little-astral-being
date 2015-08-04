@@ -1,0 +1,21 @@
+$browsercorner-position: fixed;
+$browsercorner-padding: 10px;
+.top { position: $browsercorner-position; top: $browsercorner-padding; width: 100%; }
+
+.bottom { position: $browsercorner-position; bottom: $browsercorner-padding; width: 100% }
+
+.topleft { position: $browsercorner-position; top: $browsercorner-padding; left:  $browsercorner-padding; }
+
+.bottomleft { position: $browsercorner-position; bottom: $browsercorner-padding; left:  $browsercorner-padding; }
+
+.topright { position: $browsercorner-position; top: $browsercorner-padding; right:  $browsercorner-padding; }
+
+.bottomright { position: $browsercorner-position; bottom: $browsercorner-padding; right:  $browsercorner-padding; }
+
+.center
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

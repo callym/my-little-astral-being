@@ -24,16 +24,3 @@ $elements:
 	"fire"		$fire,
 	"spirit" 	$spirit,
 	"water" 	$water;
-
-@mixin icon($name)
-{
-	$withslash: "\"\\#{$name}\"";
-	&::before
-	{
-		margin-right: .5em;
-		vertical-align: middle;
-		font-family: FontAwesome;
-		font-size: inherit;
-		content: "#{'\"\\' + $name + "\""}";
-	}
-}
