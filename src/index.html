@@ -12,7 +12,7 @@
 	</head>
 	<body class="hide">
 		<div id="overlay"><div id="overlay-box"></div></div>
-		<div id="pet-name-dialog" title="a strange crystal falls from the sky...">
+		<div class="dialog" id="pet-name-dialog" title="a strange crystal falls from the sky...">
 			you pick it up and feel the vibrations from its energy field.
 			<br/><br/>
 			when you get home, you put it in a safe place.
@@ -34,6 +34,10 @@
 			what do you want to call it?
 			<br/><br/>
 			<span id="pet-name" data-contenteditable="true" data-initial="Fluffy"></span>.
+			<div class="buttons">
+				<button>blah</button>
+				<button class="close" data-setvariable='{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }'>OK</button>
+			</div>
 		</div>
 
 		<canvas id="petcanvas"></canvas>
@@ -86,18 +90,7 @@
 				pet.runDay();
 			});
 
-			$("#pet-name-dialog").dialog(
-			{
-				buttons:
-				[{
-					'data-setvariable':'{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }',
-					text: "OK",
-					click: function()
-					{
-						$(this).dialog( "close" );
-					}
-				}]
-			});
+			$("#pet-name-dialog").dialog();
 		});
 		</script>
 	</body>
