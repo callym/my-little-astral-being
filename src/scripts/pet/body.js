@@ -8,6 +8,10 @@ function Body(pet)
 
 	this.dust = new SettableInt(100, 0, "pet:body:dust:changed");
 	this.dust.setCurrent(0);
+	this.polish = function()
+	{
+		this.dust.changeCurrent(-RandomInt(15, 5));
+	}
 };
 
 Body.prototype.SubSpecies =
