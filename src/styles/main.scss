@@ -38,14 +38,15 @@ body
 
 .cycleLinkIcon
 {
+	white-space: nowrap;
 	color: $compliment-colour-light;
 	margin-right: 0.2em;
 	font-size: 0.6em;
-	vertical-align: middle;
 }
 
 .contentEditableIcon
 {
+	white-space: nowrap;
 	font-size: 14px;
 	color: $compliment-colour-light;
 }
