@@ -36,6 +36,20 @@ body
 	color: $compliment-colour-dark;
 }
 
+.cycleLinkIcon
+{
+	color: $compliment-colour-light;
+	margin-right: 0.2em;
+	font-size: 0.6em;
+	vertical-align: middle;
+}
+
+.contentEditableIcon
+{
+	font-size: 14px;
+	color: $compliment-colour-light;
+}
+
 table
 {
 	width: 100%;

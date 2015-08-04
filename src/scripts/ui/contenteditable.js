@@ -26,7 +26,7 @@ runOnDOMChange(function()
 		}
 
 		var cycleLinkIcon = document.createElement("i");
-		cycleLinkIcon.classList.add("cycleLinkIcon", "fa", "fa-keyboard-o");
+		cycleLinkIcon.classList.add("contentEditableIcon", "fa", "fa-keyboard-o");
 		newUpdateList[i].appendChild(cycleLinkIcon);
 
 		var ce = document.createElement("span");

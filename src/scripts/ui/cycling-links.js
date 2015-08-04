@@ -83,7 +83,7 @@ function nextCyclingLink(thisLink)
     if (thisLink.innerHTML == thisLink.textContent)
 	{
 		var cycleLinkIcon = document.createElement("i");
-		cycleLinkIcon.classList.add("cycleLinkIcon", "fa", "fa-circle-o-notch", "fa-spin");
+		cycleLinkIcon.classList.add("cycleLinkIcon", "fa", "fa-spinner", "fa-pulse");
 		$(thisLink).prepend(cycleLinkIcon);
 	}
 };
