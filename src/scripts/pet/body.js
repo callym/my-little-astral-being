@@ -16,6 +16,7 @@ function Body(pet)
 	{
 		if (pet.body.dust.current == 100)
 		{
+			pet.death(pet.name + " relies on light to survive, however you let them get so dusty that they starved.");
 			TriggerEvents("pet:death");
 		}
 	});
