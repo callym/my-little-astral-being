@@ -86,36 +86,6 @@
 				pet.runDay();
 			});
 
-			$.ui.dialog.prototype._title = function(title)
-			{
-				title.html(this.options.title);
-			};
-
-			var easing = "easeInCubic";
-			var duration = 1000;
-			$.extend($.ui.dialog.prototype.options,
-			{
-				dialogClass: "no-close",
-				modal: true,
-				resizable: false,
-				draggable: false,
-				minWidth: 350,
-				width: $(window).width() * 0.4,
-				beforeClose: function()
-				{
-					$('.ui-widget-overlay:first')
-						.clone()
-						.appendTo('body')
-						.show()
-						.fadeOut(duration * 2, easing, function()
-						{
-							$(this).remove();
-						});
-				},
-				hide: { effect: "fade", duration: duration, easing: easing },
-				show: { effect: "fade", duration: duration, easing: easing }
-			});
-
 			$("#pet-name-dialog").dialog(
 			{
 				buttons:
@@ -128,38 +98,6 @@
 					}
 				}]
 			});
-
-			for (var i = 0; i < document.styleSheets.length; i++)
-			{
-				ss = document.styleSheets[i];
-				var tags = ["color", "border-top", "background", "background-color"];
-				var petColour = ElementColours[pet.soul.highestElement.name].html;
-				var petColourDark = tinycolor(petColour).darken(20).toHexString();
-
-				for (var j = 0; j < ss.cssRules.length; j++)
-				{
-					rules = ss.cssRules[j];
-					if (typeof rules == "undefined")
-					{
-						continue;
-					}
-					if (typeof rules.style == "undefined")
-					{
-						continue;
-					}
-					if (typeof rules.style.cssText != "undefined")
-					{
-						if (rules.style.cssText.indexOf("lime") > -1)
-						{
-							rules.style.cssText = rules.style.cssText.replace("lime", petColour);
-						}
-						if (rules.style.cssText.indexOf("blue") > -1)
-						{
-							rules.style.cssText = rules.style.cssText.replace("blue", petColourDark);
-						}
-					}
-				}
-			}
 		});
 		</script>
 	</body>
