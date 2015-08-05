@@ -1,0 +1,119 @@
+.fa
+{
+	margin-right: 0.5em;
+}
+
+i {
+	&:not(.fa)
+	{
+		font-style: normal;
+		position: relative;
+		text-align: center;
+		display: inline-block;
+	}
+
+	&::before
+	{
+		display: inline-block;
+		background-repeat: no-repeat;
+		background-position: center;
+		vertical-align: middle;
+		content: "";
+		margin-right: 5px;
+	}
+
+	&.text
+	{
+		&::after
+		{
+			display: inline-block;
+		}
+
+		&:not(.vertical)
+		{
+			margin-bottom: 10px;
+			&::after
+			{
+				display: block;
+				position: absolute;
+				bottom: -10;
+				width: 100%;
+			}
+			&.i16
+			{
+				margin-bottom: 0px;
+				&::after
+				{
+					display: none;
+				}
+			}
+			&.i32::after
+			{
+				font-size: 0.6em;
+			}
+		}
+
+		&.vertical
+		{
+			&::after
+			{
+				vertical-align: middle;
+				transform: rotate(90deg);
+			}
+			&.i16::after
+			{
+				font-size: 0.7em;
+				margin-right: 5px;
+				transform: none;
+				width: 16px;
+			}
+			&.i32::after
+			{
+				margin-left: -10px;
+				margin-right: -5px;
+				font-size: 0.6em;
+				width: 32px;
+			}
+			&.i64::after
+			{
+				margin-left: -20px;
+				margin-right: -20px;
+				font-size: 1.3em;
+				width: 64px;
+			}
+			&.i128::after
+			{
+				margin-left: -40px;
+				margin-right: -40px;
+				font-size: 2.5em;
+				width: 128px;
+			}
+		}
+	}
+}
+
+$iconsizes: 16 32 64 128;
+@each $size in $iconsizes
+{
+	i.i#{$size}::before
+	{
+		background-size: #{$size}px;
+		padding-top: #{$size}px;
+		width: #{$size}px;
+	}
+}
+
+@each $name, $colour in $elements
+{
+	i.#{$name}::before
+	{
+		background-image: url(/images/elements/#{$name}.png);
+	}
+	i.#{$name}.text
+	{
+		&::after
+		{
+			content: "#{$name}";
+		}
+	}
+}
