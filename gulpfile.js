@@ -8,30 +8,25 @@ var gulp 			= require('gulp'),
 	closure			= require('gulp-closure-compiler'),
 	htmlmin			= require('gulp-htmlmin'),
 	runSequence		= require('run-sequence')
-	gif				= require('gulp-if');
+	gif				= require('gulp-if'),
+	template		= require('gulp-template'),
+	filter 			= require('gulp-filter');
 
-gulp.slurped = false;
-var debug = false;
+debug = false;
 
 gulp.task('webserver', function()
 {
-	if (!gulp.slurped)
-	{
-		connect.server({
-			livereload: true,
-			root: ['build']
-		});
-	}
+	connect.server({
+		livereload: true,
+		root: ['build']
+	});
 });
 
 gulp.task('livereload', function()
 {
-	if (!gulp.slurped)
-	{
-		gulp.src(['build/**/*.*'])
-			.pipe(watch('build/**/*'))
-			.pipe(connect.reload());
-	}
+	gulp.src(['build/**/*.*'])
+		.pipe(watch('build/**/*'))
+		.pipe(connect.reload());
 });
 
 gulp.task('sass', function()
@@ -78,7 +73,9 @@ gulp.task('javascript', function()
 
 gulp.task('html', function()
 {
-	gulp.src('src/**/*.html')
+	gulp.src('src/index.html')
+		.pipe(include()
+			.on('error', util.log))
 		.pipe(gif(debug, htmlmin(
 		{
 			removeComments: true,
@@ -103,15 +100,12 @@ gulp.task('assets', function()
 
 gulp.task('watch', function()
 {
-	if (!gulp.slurped)
-	{
-		gulp.watch('gulpfile.js', 			['default']);
-		gulp.watch('src/styles/**/*.*', 	['sass']);
-		gulp.watch('src/scripts/**/*.*', 	['javascript']);
-		gulp.watch('src/images/**/*.*', 	['images']);
-		gulp.watch('src/assets/**/*.*', 	['assets']);
-		gulp.watch('src/**/*.html', 		['html']);
-	}
+	gulp.watch('src/styles/**/*.*', 	['sass']);
+	gulp.watch('src/scripts/**/*.*', 	['javascript']);
+	gulp.watch('src/images/**/*.*', 	['images']);
+	gulp.watch('src/assets/**/*.*', 	['assets']);
+	gulp.watch('src/index.html', 		['html']);
+	gulp.watch('src/html/**/*.*',	 	['html']);
 });
 
 gulp.task('default', ['sass', 'javascript', 'html', 'images', 'assets', 'webserver', 'livereload', 'watch']);

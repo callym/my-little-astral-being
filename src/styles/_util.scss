@@ -8,6 +8,11 @@
 	text-align: center;
 }
 
+.italic
+{
+	font-style: italic;
+}
+
 .hide
 {
 	display: none;
@@ -19,4 +24,77 @@
 					1px -1px 0 black,
 					-1px 1px 0 black,
 					1px 1px 0 black;
+}
+
+.circle-container
+{
+	$numberOfElements: 5;
+	$diameter: 500px;
+	$element-width: 93px;
+	$element-height: 64px;
+	$offset: 72 / 4;
+	$animation-speed: 120s;
+
+	$radius: $diameter / 2;
+	$angle: 360 / $numberOfElements;
+	$element-width-2: $element-width / 2;
+	$element-width-4: $element-width / 4;
+	$element-height-2: $element-height / 2;
+
+	position: relative;
+	width: $diameter;
+	height: $diameter;
+	padding: 64px;
+	margin: $element-height auto 0 auto;
+	overflow: hidden;
+
+	& .circle-animate
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: $diameter;
+		height: $diameter;
+		padding: 64px;
+		animation: circle $animation-speed linear infinite;
+		backface-visibility: hidden;
+		perspective: 1000;
+		transform: translate3d(0, 0, 0);
+	}
+
+	& span.text
+	{
+		text-align: center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	@for $i from 1 through $numberOfElements
+	{
+		$j: ($i * $angle) + $offset;
+		& .circle#{$i}
+		{
+			position: absolute;
+			left: $radius * cos($j * pi() / 180) + $radius + $element-width-4;
+			top: $radius * sin($j * pi() / 180) + $radius + $element-height-2;
+			animation: inner-circle $animation-speed linear infinite;
+			backface-visibility: hidden;
+			perspective: 1000;
+			transform: translate3d(0, 0, 0);
+			transform-style: preserve-3d
+		}
+	}
+
+	@keyframes circle
+	{
+		from { transform: rotate(0deg); }
+		to { transform: rotate(360deg); }
+	}
+	@keyframes inner-circle
+	{
+		from { transform: rotate(0deg); }
+		to { transform: rotate(-360deg); }
+	}
 }

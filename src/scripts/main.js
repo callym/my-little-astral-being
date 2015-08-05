@@ -136,6 +136,6 @@ $(document).ready(function()
 
 	$("body").fadeIn(1000, function()
 	{
-		$("body").removeClass("hideOpacity");
+		$("body").removeClass("hide");
 	});
 });

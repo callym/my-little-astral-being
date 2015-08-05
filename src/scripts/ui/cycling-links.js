@@ -58,7 +58,7 @@ function nextCyclingLink(thisLink)
 	if (cycleType === "desc")
 	{
 		thisLink.textContent = options[nextIndex];
-		eval(v + " = '" + options[nextIndex] + "'");
+		eval(v + " = \"" + options[nextIndex] + "\"");
 	}
 	else if (cycleType.indexOf("maths") > -1)
 	{

@@ -7,11 +7,12 @@ var easing = "easeInCubic";
 var duration = 1000;
 $.extend($.ui.dialog.prototype.options,
 {
+	autoOpen: false,
 	dialogClass: "no-close hide",
 	modal: true,
 	resizable: false,
 	draggable: false,
-	minWidth: 350,
+	minWidth: 450,
 	width: $(window).width() * 0.4,
 	beforeClose: function()
 	{

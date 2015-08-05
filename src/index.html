@@ -11,69 +11,16 @@
 		<script src="scripts/main.js"></script>
 	</head>
 	<body class="hide">
-		<div class="dialog" id="pet-name-dialog" title="a strange crystal falls from the sky...">
-			you pick it up and feel the vibrations from its energy field.
-			<br/><br/>
-			when you get home, you put it in a safe place.
-			<br/><br/>
-			the crystal glistens in the
-			<a data-cyclinglink='{ "variable": "variableToSet", "type": "desc",
-				"options": [
-				"vibrant beam of golden sunlight",
-				"pale silver curtain of moonlight",
-				"glowing aura of your laptop screen"
-				]}'></a>
-			<br/><br/>
-			a small crack is appearing on the egg-shaped stone.
-			<br/><br/>
-			could it be?
-			<br/><br/>
-			is this an astral being?
-			<br/><br/>
-			what do you want to call it?
-			<br/><br/>
-			<span id="pet-name" data-contenteditable="true" data-initial="Fluffy"></span>.
-			<div class="buttons">
-				<button>blah</button>
-				<button class="close" data-setvariable='{ "variable": "pet.name", "type": "desc", "element": "#pet-name" }'>OK</button>
-			</div>
-		</div>
+		<div id="content" class="hide">
+			//= require /html/popups/*.html
 
-		<canvas id="petcanvas"></canvas>
+			<canvas id="petcanvas"></canvas>
 
-		<div class="bottom">
-		<div id="menu">
-			<ul>
-				<li><a href="#pet-data">data</a></li>
-				<li><a href="#pet-element-stats">elements</a></li>
-				<li><a href="#pet-actions">actions</a></li>
-			</ul>
-			<div id="pet-data">
-				<div>
-					<span data-showvariable="pet.name"></span> is <span data-showvariable="pet.body.species.articleName()"></span>
-				</div>
-				<div>
-					<div class="progress-label">dusty:</div>
-					<div class="progress-wrapper">
-						<progress class="silver" data-event='pet:body:dust:change' data-progress='pet.body.dust' data-max='100'></progress>
-					</div>
-				</div>
-			</div>
-			<div id="pet-element-stats">
-				<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
-			</div>
-			<div id="pet-actions">
-				<button id="polish">polish</button>
-			</div>
-		</div>
-		</div>
+			//= require /html/menu.html
 
-		<div class="top centerText">
-			<button id="daybutton">go to sleep</button>
-		</div>
-
-		<div class="dialog" id="pet-death-dialog" title="oh no...">
-			<span data-showvariable="pet.death()"></span>
+			<div class="top centerText">
+				<button id="daybutton">go to sleep</button>
+			</div>
 		</div>
 
 		<script type="text/javascript">
@@ -98,20 +45,7 @@
 				pet.runDay();
 			});
 
-			$("#pet-name-dialog").dialog(
-			{
-				close: function()
-				{
-					pet.death("a heavy book falls onto " + pet.name + ", who shatters into a million tiny shards.");
-				}
-			});
-
-			$("#pet-death-dialog").dialog({ autoOpen: false });
-			$(document).on("pet:death", function()
-			{
-				console.log("DEAD!");
-				$("#pet-death-dialog").dialog("open");
-			});
+			//= require /html/footer/*.js
 		});
 		</script>
 	</body>
