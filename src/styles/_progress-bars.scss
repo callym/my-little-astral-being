@@ -9,14 +9,14 @@ progress
 	height: 2px;
 	vertical-align: 0.2em;
 	position: relative;
-	float: right;
+	//float: right;
 }
 
 .progress-wrapper
 {
-	height: 18px;
-	padding-top: 20px;
-	overflow: auto;
+	height: 38px;
+//	padding-top: 20px;
+//	overflow: auto;
 }
 
 .progress-label
@@ -29,7 +29,7 @@ progress
 .progressbar-overlay
 {
 	text-align: right;
-	bottom: 1.2ex;
+	bottom: 0.7ex;
 	position: absolute;
 }
 

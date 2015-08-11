@@ -1,5 +1,6 @@
 //=require utils/**/*.js
 //=require pet/pet.js
+//=require item/item.js
 //=require pixi/pixi-req.js
 
 

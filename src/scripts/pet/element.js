@@ -18,16 +18,18 @@ function Elements()
 		var arr = self.toArray();
 		for (var i = 0; i < arr.length; i++)
 		{
-			var max = (arr[i].level.maximum == 0) ? 0.1 : arr[i].level.maximum;
 			var img = "<img src='" + arr[i].sprite + "' height='32' width='32'>";
 			var progress = 	"<progress data-event='pet:element:" + arr[i].name + ":change' class='" + arr[i].name +
 							"' data-progress='pet.soul.elements." + arr[i].name + ".level'" +
 							" data-max='10'></progress>";
-			var max = "<span data-showvariable=" + arr[i].level.maximum + "></span>"
-			t.push([img, progress, arr[i].level.maximum]);
+			var max = "<span data-showvariable='pet.soul.elements." +
+								arr[i].name + ".level.maximum'>" +
+								arr[i].level.maximum +
+								"</span>";
+			t.push([img, progress, max]);
 		}
 
-		var classes = ["shrink", "", "shrink rightText"];
+		var classes = ["shrink", "progress-wrapper", "shrink rightText"];
 
 		return [false, classes, t];
 	};
@@ -95,7 +97,7 @@ function Element(name, level)
 	level = level || 0;
 	this.level = new SettableInt(level, 0, ["pet:element:change", "pet:element:" + name + ":change"]);
 
-	this.sprite = "/images/elements/" + name + ".png";
+	this.sprite = "images/elements/" + name + ".png";
 
 	this.maximum = function()
 	{
@@ -104,11 +106,21 @@ function Element(name, level)
 
 	this.changeMaximum = function(i)
 	{
-		this.level.changeMaximum(i);
+		var newMax = this.level.maximum + i;
+		if (newMax > 10)
+		{
+			newMax = 10;
+		}
+		this.setMaximum(newMax);
 	};
 
 	this.setMaximum = function(i)
 	{
+		var newMax = i;
+		if (newMax > 10)
+		{
+			newMax = 10;
+		}
 		this.level.setMaximum(i);
 	};
 

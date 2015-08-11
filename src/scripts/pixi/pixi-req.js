@@ -1,4 +1,3 @@
-//=require pixi.js
 //=require pixi-lights.js
 
 $(function()

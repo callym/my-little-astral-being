@@ -1,8 +1,8 @@
 function changePetSprite(spriteName, spriteNormal)
 {
 	PIXI.loader
-	.add(spriteName, "/images/" + spriteName + ".png")
-	.add(spriteNormal, "/images/" + spriteNormal + ".png")
+	.add(spriteName, "images/" + spriteName + ".png")
+	.add(spriteNormal, "images/" + spriteNormal + ".png")
 	.load(function(loader, resources)
 	{
 		pet.sprite = new PIXI.Sprite();

@@ -1,0 +1,39 @@
+<div class="dialog" id="pet-search-dialog" title="a strange crystal falls from the sky...">
+	<p><span data-showvariable="pet.name"></span> is scratching at the door, so you decide to take
+	them for a walk.</p>
+	<p>you <a data-cyclinglink='{ "variable": "var x", "type": "desc",
+		"options": [
+		"go and make sandcastles together on the beach",
+		"go for a walk in the forest",
+		"take them along while you do some shopping in the city"
+		]}'></a></p>
+	<div class="buttons">
+		<button class="look">go exploring</button>
+	</div>
+</div>
+
+<div class="dialog" id="pet-search-dialog-unlucky" title="a strange crystal falls from the sky...">
+	<p>there was nothing of interest anywhere to be seen</p>
+	<div class="buttons">
+		<button class="close">go home</button>
+	</div>
+</div>
+
+<div class="dialog" id="pet-search-dialog-item" title="a strange crystal falls from the sky...">
+	<p>you find <span data-showvariable="newItem.articleName()"></span>.</p>
+
+	<table>
+		<thead>
+			<tr>
+				<td></td>
+				<td>current</td>
+				<td>maximum</td>
+			</tr>
+		</thead>
+		<tbody id="pet-search-dialog-table"></tbody>
+	</table>
+	<div class="buttons">
+		<button class="equip">collect</button>
+		<button class="close">throw away</button>
+	</div>
+</div>

@@ -12,7 +12,7 @@ var gulp 			= require('gulp'),
 	template		= require('gulp-template'),
 	filter 			= require('gulp-filter');
 
-debug = false;
+debug = true;
 
 gulp.task('webserver', function()
 {
@@ -31,7 +31,7 @@ gulp.task('livereload', function()
 
 gulp.task('sass', function()
 {
-	var compressed = debug ? 'compressed' : 'expanded';
+	var compressed = debug ? 'expanded' : 'compressed';
 	gulp.src('src/styles/main.scss')
 		.pipe(sass(
 			{
@@ -44,7 +44,7 @@ gulp.task('sass', function()
 gulp.task('closure', function()
 {
 	return gulp.src("build/scripts/main.js")
-		.pipe(gif(debug, closure({
+		.pipe(gif(!debug, closure({
 			compilerPath: 'node_modules/gulp-closure-compiler/jar/compiler.jar',
 			fileName: 'main.js',
 			continueWithWarnings: true,
@@ -76,7 +76,7 @@ gulp.task('html', function()
 	gulp.src('src/index.html')
 		.pipe(include()
 			.on('error', util.log))
-		.pipe(gif(debug, htmlmin(
+		.pipe(gif(!debug, htmlmin(
 		{
 			removeComments: true,
 			collapseWhitespace: true,
@@ -108,7 +108,13 @@ gulp.task('watch', function()
 	gulp.watch('src/html/**/*.*',	 	['html']);
 });
 
-gulp.task('default', ['sass', 'javascript', 'html', 'images', 'assets', 'webserver', 'livereload', 'watch']);
+gulp.task('default', ['sass', 'javascript', 'html', 'images', 'assets'], function()
+{
+	if (debug)
+	{
+		runSequence(['webserver', 'livereload', 'watch']);
+	}
+});
 
 gulp.task('debug', function()
 {

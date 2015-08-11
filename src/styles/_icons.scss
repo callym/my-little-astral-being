@@ -107,7 +107,7 @@ $iconsizes: 16 32 64 128;
 {
 	i.#{$name}::before
 	{
-		background-image: url(/images/elements/#{$name}.png);
+		background-image: url(../images/elements/#{$name}.png);
 	}
 	i.#{$name}.text
 	{

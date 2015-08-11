@@ -5,9 +5,10 @@
 		<title>my little astral being</title>
 		<meta name="description" content="look after your own astral pet!">
 
-		<link rel="stylesheet" href="/styles/main.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="styles/main.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.7/pixi.min.js"></script>
 		<script src="scripts/main.js"></script>
 	</head>
 	<body class="hide">
@@ -26,19 +27,6 @@
 		<script type="text/javascript">
 		$(function()
 		{
-			var tabEffect = { effect: "fade", duration: 500, easing: "linear" };
-			$("#menu").tabs(
-			{
-				hide: tabEffect,
-				show: tabEffect,
-			});
-
-			$("#polish").button().click(function(e)
-			{
-				e.preventDefault();
-				pet.body.polish();
-			});
-
 			$("#daybutton").button().click(function(e)
 			{
 				e.preventDefault();

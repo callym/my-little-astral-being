@@ -1,0 +1,70 @@
+<div class="bottom">
+	<div id="menu">
+		<ul>
+			<li><a href="#pet-data">data</a></li>
+			<li><a href="#pet-element-stats">elements</a></li>
+			<li><a href="#pet-actions">actions</a></li>
+		</ul>
+		<div id="pet-data">
+			<div>
+				<span data-showvariable="pet.name"></span>
+				seems to be made from
+				<span data-showvariable="pet.body.species.name"></span>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<td class="shrink">
+							dusty:
+						</td>
+						<td class="progress-wrapper">
+
+								<progress class="silver"
+									data-event='pet:body:dust:change'
+									data-progress='pet.body.dust'
+									data-max='100'></progress>
+
+						</td>
+					</tr>
+					<tr>
+						<td class="shrink">
+							mana:
+						</td>
+						<td class="progress-wrapper">
+
+								<progress class="silver"
+									data-event='pet:soul:mana:change'
+									data-progress='pet.soul.mana'
+									data-max='100'></progress>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="pet-element-stats">
+			<table data-arraytotable="pet.soul.elements.toTableArray()"></table>
+		</div>
+		<div id="pet-actions">
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<button id="polish" class="action">polish</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button id="moonlight" class="action">bathe in moonlight</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button id="search" class="action">search</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
